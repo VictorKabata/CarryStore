@@ -7,17 +7,14 @@ plugins {
     alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.sqlDelight)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
-        }
-    }
+    androidTarget()
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         when {
@@ -59,6 +56,8 @@ kotlin {
 
             // Networking
             implementation(libs.bundles.ktor)
+
+            implementation(libs.sqlDelight.coroutine)
         }
 
         sourceSets["commonTest"].dependencies {
@@ -67,10 +66,12 @@ kotlin {
 
         sourceSets["androidMain"].dependencies{
             implementation(libs.ktor.android)
+            implementation(libs.sqlDelight.android)
         }
 
         sourceSets["iosMain"].dependencies{
             implementation(libs.ktor.darwin)
+            implementation(libs.sqlDelight.native)
         }
     }
 }
@@ -84,5 +85,14 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.vickbt.shared.data.cache.sqldelight")
+            srcDirs.setFrom("src/commonMain/kotlin")
+        }
     }
 }
