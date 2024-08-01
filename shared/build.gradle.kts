@@ -40,15 +40,37 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
+        sourceSets["commonMain"].dependencies {
+            // Jetpack Compose - UI
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
             api(compose.components.resources)
+
+            implementation(libs.coroutines)
+
+            // Dependency injection
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.composeViewModel)
+
+            // Logging
+            api(libs.napier)
+
+            // Networking
+            implementation(libs.bundles.ktor)
         }
 
-        commonTest.dependencies {
+        sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        sourceSets["androidMain"].dependencies{
+            implementation(libs.ktor.android)
+        }
+
+        sourceSets["iosMain"].dependencies{
+            implementation(libs.ktor.darwin)
         }
     }
 }
