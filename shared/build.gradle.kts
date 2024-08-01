@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.sqlDelight)
+    // alias(libs.plugins.sqlDelight)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -94,11 +94,11 @@ android {
     }
 }
 
-sqldelight {
+/*sqldelight {
     databases {
         create("AppDatabase") {
             packageName.set("com.vickbt.shared.data.cache.sqldelight")
             srcDirs.setFrom("src/commonMain/kotlin")
         }
     }
-}
+}*/
