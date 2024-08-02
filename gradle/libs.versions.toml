@@ -72,6 +72,8 @@ sqlDelight-coroutine = { module = "app.cash.sqldelight:coroutines-extensions", v
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+
 #Android Lib Dependencies
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }

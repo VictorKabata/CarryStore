@@ -66,6 +66,8 @@ kotlin {
             implementation(libs.kotlinX.serializationJson)
 
             implementation(libs.sqlDelight.coroutine)
+
+            implementation(libs.navigation)
         }
 
         sourceSets["commonTest"].dependencies {
