@@ -10,10 +10,11 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.flow.Flow
 
-class ApiService(httpClient: HttpClient) {
+class ApiService(private val httpClient: HttpClient) {
 
     suspend fun fetchProducts(): Flow<Result<List<Product>>> = safeApiCall {
         val response = httpClient.get(urlString = "productBundles").body<List<ProductDto>>()
+        println("Victor Response: $response")
         return@safeApiCall response.map { it.toDomain() }
     }
 

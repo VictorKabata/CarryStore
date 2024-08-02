@@ -18,10 +18,12 @@ fun ProductsScreen(
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
 
-    val products = viewModel.products.collectAsState().value
+    val productsUiState = viewModel.products.collectAsState().value
 
     println("Victor ProductsScreen")
-    println("Victor Products: $products")
+    println("Victor Products: ${productsUiState.products}")
+    println("Victor Is loading: ${productsUiState.isLoading}")
+    println("Victor Error: ${productsUiState.errorMessage}")
 
     Box(modifier = Modifier.background(Color.Red))
 

@@ -3,15 +3,16 @@ package com.vickbt.carrystore.ui.screens.products
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickbt.carrystore.data.datasources.ProductsRepository
-import com.vickbt.carrystore.domain.models.Product
+import com.vickbt.carrystore.utils.ProductsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ProductsViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
 
-    private val _products = MutableStateFlow<List<Product>>(emptyList())
+    private val _products = MutableStateFlow(ProductsUiState())
     val products = _products.asStateFlow()
 
     init {
@@ -19,11 +20,14 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Vi
     }
 
     fun fetchProducts() = viewModelScope.launch {
+        println("Invoked VM fetchProducts")
         productsRepository.fetchProducts().collectLatest { result ->
             result.onSuccess { productsList ->
-                _products.value = productsList
-            }.onFailure {
-
+                println("Victor Product list: $productsList")
+                _products.update { it.copy(products = productsList) }
+            }.onFailure { error ->
+                println("Victor Failed: ${error.message}")
+                _products.update { it.copy(errorMessage = error.message) }
             }
         }
     }
