@@ -68,6 +68,8 @@ kotlin {
             implementation(libs.sqlDelight.coroutine)
 
             implementation(libs.navigation)
+
+            implementation(libs.bundles.coil)
         }
 
         sourceSets["commonTest"].dependencies {

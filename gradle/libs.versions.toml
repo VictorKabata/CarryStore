@@ -21,7 +21,6 @@ kotlinxDateTime = "0.6.0"
 ktor = "2.3.12"
 sqlDelight = "2.0.1"
 
-
 #Android Versions
 appCompat = "1.7.0"
 composeActivity = "1.9.1"
