@@ -8,7 +8,7 @@ import com.vickbt.carrystore.ui.screens.main.MainScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("Victor MainActivity")
+
         setContent {
             MainScreen()
         }

@@ -5,5 +5,5 @@ import com.vickbt.carrystore.domain.models.Product
 data class ProductsUiState(
     val isLoading: Boolean = true,
     val errorMessage: String? = null,
-    val products: List<Product> = emptyList()
+    val products: List<Product>? = emptyList()
 )

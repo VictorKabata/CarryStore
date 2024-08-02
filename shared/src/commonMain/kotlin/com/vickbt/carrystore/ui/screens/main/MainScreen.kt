@@ -13,8 +13,6 @@ import io.github.aakira.napier.Napier
 
 @Composable
 fun MainScreen() {
-    println("Victor MainScreen")
-
     CarryStoreTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) {
             val navHostController = rememberNavController()

@@ -17,10 +17,10 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Vi
 
     init {
         fetchProducts()
+        println("Invoked VM fetchProducts")
     }
 
     fun fetchProducts() = viewModelScope.launch {
-        println("Invoked VM fetchProducts")
         productsRepository.fetchProducts().collectLatest { result ->
             result.onSuccess { productsList ->
                 println("Victor Product list: $productsList")
