@@ -3,7 +3,6 @@ kotlin = "2.0.0"
 agp = "8.5.1"
 ktLint = "11.5.1"
 detekt = "1.19.0"
-gradleVersionUpdate = "0.51.0"
 
 # Kotlin Multiplatform Version
 composeMultiplatform = "1.6.11"
@@ -14,6 +13,7 @@ koinComposeViewModel = "1.2.0-Beta5"
 napier = "2.7.1"
 coroutines = "1.8.1"
 navigation = "2.7.0-alpha07"
+
 coil = "3.0.0-alpha06"
 datastore = "1.1.1"
 kotlinxSerializationJson = "1.7.1"

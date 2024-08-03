@@ -6,8 +6,8 @@ data class Product(
     val description: String,
     val price: Int,
     val currencyCode: String,
-    val currencySymbol: String,
-    val quantity: Int,
+    val currencySymbol: String? = null,
+    val quantity: Int? = null,
     val imageLocation: String,
-    val status: String
+    val status: String? = null
 )
