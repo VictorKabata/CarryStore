@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.vickbt.carrystore.ui.components.AppBar
 import com.vickbt.carrystore.ui.components.BottomNavBar
 import com.vickbt.carrystore.ui.navigation.Navigation
 import com.vickbt.carrystore.ui.navigation.NavigationItem
@@ -22,11 +23,16 @@ fun MainScreen() {
         val isTopLevelDestination =
             navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
 
-        println("Victor Destination: ${navHostController.currentBackStackEntryAsState().value?.destination?.route}")
-        println("Victor isTopLevelDestination: $isTopLevelDestination")
-
         Scaffold(
             modifier = Modifier.fillMaxSize(),
+            topBar = {
+                if (isTopLevelDestination) {
+                    AppBar(
+                        title = navHostController.currentBackStackEntryAsState().value?.destination?.route
+                            ?: ""
+                    )
+                }
+            },
             bottomBar = {
                 if (isTopLevelDestination) {
                     BottomNavBar(
@@ -35,8 +41,8 @@ fun MainScreen() {
                         bottomNavItems = topLevelDestinations
                     )
                 }
-            }) {
-            Navigation(navHostController = navHostController)
+            }) { paddingValues ->
+            Navigation(navHostController = navHostController, paddingValues = paddingValues)
         }
     }
 }

@@ -5,7 +5,9 @@ package com.vickbt.carrystore.ui.screens.products
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -27,12 +29,13 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun ProductsScreen(
     navHostController: NavHostController,
+    paddingValues: PaddingValues = PaddingValues(),
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
 
     val productsUiState = viewModel.products.collectAsState().value
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
         if (productsUiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
