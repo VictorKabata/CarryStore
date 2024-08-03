@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.nativeCocoapod)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinX.serialization)
     // alias(libs.plugins.sqlDelight)
 }
 
@@ -62,8 +63,13 @@ kotlin {
 
             // Networking
             implementation(libs.bundles.ktor)
+            implementation(libs.kotlinX.serializationJson)
 
             implementation(libs.sqlDelight.coroutine)
+
+            implementation(libs.navigation)
+
+            implementation(libs.bundles.coil)
         }
 
         sourceSets["commonTest"].dependencies {

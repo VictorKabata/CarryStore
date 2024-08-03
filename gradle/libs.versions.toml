@@ -21,7 +21,6 @@ kotlinxDateTime = "0.6.0"
 ktor = "2.3.12"
 sqlDelight = "2.0.1"
 
-
 #Android Versions
 appCompat = "1.7.0"
 composeActivity = "1.9.1"
@@ -29,7 +28,6 @@ composeActivity = "1.9.1"
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-gradleVersionUpdates = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionUpdate" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 nativeCocoapod = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -38,6 +36,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinX-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
 [libraries]
@@ -50,8 +49,6 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComp
 koin-composeViewModel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
-
-datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 
 kotlinX-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinX-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDateTime" }
@@ -73,6 +70,8 @@ sqlDelight = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight
 sqlDelight-coroutine = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 #Android Lib Dependencies
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
