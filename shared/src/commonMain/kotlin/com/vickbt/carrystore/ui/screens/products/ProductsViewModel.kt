@@ -17,7 +17,6 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Vi
 
     init {
         fetchProducts()
-        println("Victor Invoked VM fetchProducts")
     }
 
     fun fetchProducts() = viewModelScope.launch {
