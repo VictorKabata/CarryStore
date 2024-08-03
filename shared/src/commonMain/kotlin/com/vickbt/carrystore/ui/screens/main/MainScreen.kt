@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.intl.Locale
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.vickbt.carrystore.ui.components.AppBar
@@ -28,7 +30,9 @@ fun MainScreen() {
             topBar = {
                 if (isTopLevelDestination) {
                     AppBar(
-                        title = navHostController.currentBackStackEntryAsState().value?.destination?.route
+                        title = navHostController.currentBackStackEntryAsState().value?.destination?.route?.capitalize(
+                            Locale.current
+                        )
                             ?: ""
                     )
                 }
