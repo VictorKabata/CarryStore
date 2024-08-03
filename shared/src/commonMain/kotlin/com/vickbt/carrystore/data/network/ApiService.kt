@@ -12,9 +12,8 @@ import kotlinx.coroutines.flow.Flow
 
 class ApiService(private val httpClient: HttpClient) {
 
-    suspend fun fetchProducts(): Flow<Result<List<Product>>> = safeApiCall {
+    suspend fun fetchProducts(): Result<List<Product>> = safeApiCall {
         val response = httpClient.get(urlString = "productBundles").body<List<ProductDto>>()
-        println("Victor Response: $response")
         return@safeApiCall response.map { it.toDomain() }
     }
 

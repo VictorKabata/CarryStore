@@ -12,22 +12,20 @@ import kotlinx.coroutines.launch
 
 class ProductsViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
 
-    private val _products = MutableStateFlow(ProductsUiState())
+    private val _products = MutableStateFlow(ProductsUiState(isLoading = true))
     val products = _products.asStateFlow()
 
     init {
         fetchProducts()
-        println("Invoked VM fetchProducts")
+        println("Victor Invoked VM fetchProducts")
     }
 
     fun fetchProducts() = viewModelScope.launch {
         productsRepository.fetchProducts().collectLatest { result ->
             result.onSuccess { productsList ->
-                println("Victor Product list: $productsList")
-                _products.update { it.copy(products = productsList) }
+                _products.update { it.copy(isLoading = false, products = productsList) }
             }.onFailure { error ->
-                println("Victor Failed: ${error.message}")
-                _products.update { it.copy(errorMessage = error.message) }
+                _products.update { it.copy(isLoading = false, errorMessage = error.message) }
             }
         }
     }
