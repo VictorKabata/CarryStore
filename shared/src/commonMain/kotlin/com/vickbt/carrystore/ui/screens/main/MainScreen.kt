@@ -1,22 +1,41 @@
 package com.vickbt.carrystore.ui.screens.main
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.vickbt.carrystore.ui.components.BottomNavBar
 import com.vickbt.carrystore.ui.navigation.Navigation
+import com.vickbt.carrystore.ui.navigation.NavigationItem
 import com.vickbt.carrystore.ui.theme.CarryStoreTheme
-import io.github.aakira.napier.Napier
 
 @Composable
 fun MainScreen() {
-    CarryStoreTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) {
-            val navHostController = rememberNavController()
 
+    CarryStoreTheme {
+        val navHostController = rememberNavController()
+
+        val topLevelDestinations = listOf(NavigationItem.Products, NavigationItem.Cart)
+        val isTopLevelDestination =
+            navHostController.currentBackStackEntryAsState().value?.destination?.route in topLevelDestinations.map { it.route }
+
+        println("Victor Destination: ${navHostController.currentBackStackEntryAsState().value?.destination?.route}")
+        println("Victor isTopLevelDestination: $isTopLevelDestination")
+
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = {
+                if (isTopLevelDestination) {
+                    BottomNavBar(
+                        modifier = Modifier.fillMaxWidth(),
+                        navHostController = navHostController,
+                        bottomNavItems = topLevelDestinations
+                    )
+                }
+            }) {
             Navigation(navHostController = navHostController)
         }
     }
