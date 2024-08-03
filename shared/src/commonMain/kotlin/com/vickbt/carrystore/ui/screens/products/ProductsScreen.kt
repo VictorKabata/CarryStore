@@ -54,7 +54,7 @@ fun ProductsScreen(
             ) {
                 items(productsUiState.products ?: emptyList()) { product ->
                     ItemProduct(modifier = Modifier, product = product) {
-                        navHostController.navigate(NavigationItem.Products.route)
+                        navHostController.navigate(NavigationItem.ProductDetails.route)
                     }
                 }
             }
