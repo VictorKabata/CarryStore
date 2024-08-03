@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.vickbt.carrystore.ui.screens.cart.CartScreen
 import com.vickbt.carrystore.ui.screens.products.ProductsScreen
 
 @Composable
@@ -23,7 +24,7 @@ fun Navigation(
         }
 
         composable(route = NavigationItem.Cart.route) {
-            ProductsScreen(navHostController = navHostController)
+            CartScreen(navHostController = navHostController, paddingValues = paddingValues)
         }
     }
 
