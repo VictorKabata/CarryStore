@@ -96,7 +96,7 @@ fun ProductDetailsScreen(
         }
 
         Text(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             text = "Description",
             fontSize = 16.sp,
             maxLines = 1,
@@ -105,8 +105,6 @@ fun ProductDetailsScreen(
             color = MaterialTheme.colorScheme.onSurface
         )
 
-        Spacer(modifier = Modifier.height(2.dp))
-
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = product.description,
@@ -114,6 +112,8 @@ fun ProductDetailsScreen(
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f)
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         Column(
             modifier = Modifier.fillMaxWidth(),

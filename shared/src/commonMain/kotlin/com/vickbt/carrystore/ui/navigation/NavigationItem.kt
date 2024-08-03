@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class NavigationItem(val route: String, val title: String, val icon: ImageVector?) {
     object Products : NavigationItem("products", "Products", Icons.Rounded.Home)
-    
+
     object ProductDetails : NavigationItem(
         "product/{id}/{name}/{description}/{price}/{currencyCode}",
         "Product Details",
