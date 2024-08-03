@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.screens.products.ProductsViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -42,7 +43,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun ProductDetailsScreen(
     navHostController: NavHostController,
     paddingValues: PaddingValues = PaddingValues(),
-    // product: Product,
+    product: Product,
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
 
@@ -54,7 +55,7 @@ fun ProductDetailsScreen(
         Box(modifier = Modifier.fillMaxWidth().fillMaxHeight(.50f)) {
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),
-                model = "https://dev-images-carry1st-products.s3.eu-west-2.amazonaws.com/a3fc8953-ba5b-4fb4-9017-223557716594.png",
+                model = "https://dev-images-carry1st-products.s3.eu-west-2.amazonaws.com/c3593c7e-da28-4013-87eb-d06582f60bc1.png",
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -76,7 +77,7 @@ fun ProductDetailsScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Product Name",
+                text = product.name,
                 fontSize = 24.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -85,7 +86,7 @@ fun ProductDetailsScreen(
             )
 
             Text(
-                text = "USD 1",
+                text = "${product.currencyCode} ${product.price}",
                 fontSize = 24.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -108,7 +109,7 @@ fun ProductDetailsScreen(
 
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
-            text = "Description Content",
+            text = product.description,
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f)

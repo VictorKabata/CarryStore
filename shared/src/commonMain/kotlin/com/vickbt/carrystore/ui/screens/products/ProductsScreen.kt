@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemProduct
-import com.vickbt.carrystore.ui.navigation.NavigationItem
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -54,7 +53,7 @@ fun ProductsScreen(
             ) {
                 items(productsUiState.products ?: emptyList()) { product ->
                     ItemProduct(modifier = Modifier, product = product) {
-                        navHostController.navigate(NavigationItem.ProductDetails.route)
+                        navHostController.navigate("product/${product.id}/${product.name}/${product.description}/${product.price}/${product.currencyCode}")
                     }
                 }
             }
