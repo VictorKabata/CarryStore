@@ -38,7 +38,7 @@ fun ItemCartProduct(
         Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
             AsyncImage(
                 modifier = Modifier.fillMaxSize(.20f).weight(3f),
-                model = "https://dev-images-carry1st-products.s3.eu-west-2.amazonaws.com/c3593c7e-da28-4013-87eb-d06582f60bc1.png",
+                model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
