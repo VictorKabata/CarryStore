@@ -73,8 +73,13 @@ fun ProductsScreen(
                 ProductBottomSheet(
                     modifier = Modifier.fillMaxWidth().fillMaxHeight(.60f),
                     product = it,
-                    onAddToCartClicked = {viewModel.saveProduct(product = it)},
-                    onBuyNowClicked = {},
+                    onAddToCartClicked = {
+                        viewModel.saveProduct(product = it)
+                        scope.launch { sheetState.hide() }
+                    },
+                    onBuyNowClicked = {
+                        scope.launch { sheetState.hide() }
+                    },
                     onDismiss = { }
                 )
             }

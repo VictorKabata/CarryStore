@@ -44,15 +44,13 @@ fun ProductBottomSheet(
     val columnScrollState = rememberScrollState()
 
     Column(modifier = modifier.fillMaxSize().verticalScroll(columnScrollState)) {
-        Box(modifier = Modifier.fillMaxWidth().fillMaxHeight(.50f)) {
-            AsyncImage(
-                modifier = Modifier.fillMaxSize(),
-                model = product.imageLocation,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
-            )
-        }
+        AsyncImage(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(.40f),
+            model = product.imageLocation,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center,
+        )
 
         Row(
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
