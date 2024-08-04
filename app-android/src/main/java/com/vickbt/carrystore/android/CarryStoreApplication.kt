@@ -1,21 +1,19 @@
 package com.vickbt.carrystore.android
 
 import android.app.Application
-import com.vickbt.carrystore.di.commonModule
-import com.vickbt.carrystore.di.platformModule
+import com.vickbt.carrystore.utils.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
-class CarryStoreApplication:Application() {
+class CarryStoreApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        startKoin{
-            androidLogger()
+        initKoin {
+            androidLogger(level = Level.DEBUG)
             androidContext(this@CarryStoreApplication)
-            modules(commonModule, platformModule())
         }
     }
 }
