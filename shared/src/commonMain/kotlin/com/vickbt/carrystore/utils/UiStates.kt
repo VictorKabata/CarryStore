@@ -7,3 +7,14 @@ data class ProductsUiState(
     val errorMessage: String? = null,
     val products: List<Product>? = emptyList()
 )
+
+data class ProductDetailsUiState(
+    val errorMessage: String? = null,
+    val isProductInCart: Boolean = false,
+)
+
+data class CartUiState(
+    val isLoading: Boolean = true,
+    val errorMessage: String? = null,
+    val products: List<Product>? = emptyList()
+)

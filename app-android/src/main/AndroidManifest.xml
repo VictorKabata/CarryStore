@@ -4,11 +4,12 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".CarryStoreApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

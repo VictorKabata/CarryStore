@@ -53,7 +53,7 @@ fun ProductsScreen(
             ) {
                 items(productsUiState.products ?: emptyList()) { product ->
                     ItemProduct(modifier = Modifier, product = product) {
-                        navHostController.navigate("product/${product.id}/${product.name}/${product.description}/${product.price}/${product.currencyCode}")
+                        navHostController.navigate("product/${product.id}/${product.name}/${product.description}/${product.price}/${product.currencySymbol}/${product.currencyCode}")
                     }
                 }
             }

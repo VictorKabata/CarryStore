@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
-import com.vickbt.carrystore.ui.screens.products.ProductsViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -44,7 +43,7 @@ fun ProductDetailsScreen(
     navHostController: NavHostController,
     paddingValues: PaddingValues = PaddingValues(),
     product: Product,
-    viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
+    viewModel: ProductDetailsViewModel = koinViewModel<ProductDetailsViewModel>()
 ) {
 
     val columnScrollState = rememberScrollState()
@@ -122,7 +121,7 @@ fun ProductDetailsScreen(
         ) {
             Button(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-                onClick = {},
+                onClick = { viewModel.saveProduct(product = product) },
                 shape = MaterialTheme.shapes.medium
             ) {
                 Text(
@@ -136,7 +135,7 @@ fun ProductDetailsScreen(
 
             Button(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-                onClick = {},
+                onClick = { navHostController.navigateUp() },
                 shape = MaterialTheme.shapes.medium,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surface,

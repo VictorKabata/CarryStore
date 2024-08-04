@@ -30,6 +30,7 @@ fun Navigation(
                 navArgument("name") { type = NavType.StringType },
                 navArgument("description") { type = NavType.StringType },
                 navArgument("price") { type = NavType.IntType },
+                navArgument("currencySymbol") { type = NavType.StringType },
                 navArgument("currencyCode") { type = NavType.StringType },
             )
         ) { backStackEntry ->
@@ -38,6 +39,7 @@ fun Navigation(
                 name = backStackEntry.arguments?.getString("name") ?: "",
                 description = backStackEntry.arguments?.getString("description") ?: "",
                 price = backStackEntry.arguments?.getInt("price") ?: 0,
+                currencySymbol = backStackEntry.arguments?.getString("currencySymbol") ?: "",
                 currencyCode = backStackEntry.arguments?.getString("currencyCode") ?: "",
                 imageLocation = ""
             )

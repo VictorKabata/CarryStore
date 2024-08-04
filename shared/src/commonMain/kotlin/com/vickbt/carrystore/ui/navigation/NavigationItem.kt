@@ -9,7 +9,7 @@ sealed class NavigationItem(val route: String, val title: String, val icon: Imag
     object Products : NavigationItem("products", "Products", Icons.Rounded.Home)
 
     object ProductDetails : NavigationItem(
-        "product/{id}/{name}/{description}/{price}/{currencyCode}",
+        "product/{id}/{name}/{description}/{price}/{currencySymbol}/{currencyCode}",
         "Product Details",
         null
     )
