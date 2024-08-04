@@ -18,5 +18,4 @@ class CarryStoreApplication:Application() {
             modules(commonModule, platformModule())
         }
     }
-
 }
