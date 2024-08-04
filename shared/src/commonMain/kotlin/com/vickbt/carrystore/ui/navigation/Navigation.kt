@@ -23,34 +23,6 @@ fun Navigation(
             ProductsScreen(navHostController = navHostController, paddingValues = paddingValues)
         }
 
-        composable(
-            route = NavigationItem.ProductDetails.route,
-            arguments = listOf(
-                navArgument("id") { type = NavType.IntType },
-                navArgument("name") { type = NavType.StringType },
-                navArgument("description") { type = NavType.StringType },
-                navArgument("price") { type = NavType.IntType },
-                navArgument("currencySymbol") { type = NavType.StringType },
-                navArgument("currencyCode") { type = NavType.StringType },
-            )
-        ) { backStackEntry ->
-            val product = Product(
-                id = backStackEntry.arguments?.getInt("id") ?: 0,
-                name = backStackEntry.arguments?.getString("name") ?: "",
-                description = backStackEntry.arguments?.getString("description") ?: "",
-                price = backStackEntry.arguments?.getInt("price") ?: 0,
-                currencySymbol = backStackEntry.arguments?.getString("currencySymbol") ?: "",
-                currencyCode = backStackEntry.arguments?.getString("currencyCode") ?: "",
-                imageLocation = ""
-            )
-
-            ProductDetailsScreen(
-                navHostController = navHostController,
-                paddingValues = paddingValues,
-                product = product
-            )
-        }
-
         composable(route = NavigationItem.Cart.route) {
             CartScreen(navHostController = navHostController, paddingValues = paddingValues)
         }

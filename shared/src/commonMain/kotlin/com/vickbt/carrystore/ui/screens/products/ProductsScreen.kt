@@ -89,7 +89,7 @@ fun ProductsScreen(
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
                 ErrorState(
-                    modifier = Modifier,
+                    modifier = Modifier.align(Alignment.Center),
                     errorIcon = Icons.Rounded.Person,
                     errorMessage = productsUiState.errorMessage,
                     actionMessage = "Reload"
@@ -103,7 +103,6 @@ fun ProductsScreen(
                 ) {
                     items(productsUiState.products ?: emptyList()) { product ->
                         ItemProduct(modifier = Modifier, product = product) {
-                            // navHostController.navigate("product/${product.id}/${product.name}/${product.description}/${product.price}/${product.currencySymbol}/${product.currencyCode}")
                             selectedProduct = product
                             scope.launch {
                                 if (!sheetState.isVisible) {
