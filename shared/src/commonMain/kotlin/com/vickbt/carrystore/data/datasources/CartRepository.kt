@@ -13,7 +13,7 @@ class CartRepository(private val cartDao: CartDao) {
 
     suspend fun getProduct(id: Int) = cartDao.getProduct(id).map { it?.toDomain() }
 
-    suspend fun deleteProduct(id: Int) = cartDao.deleteProduct(id)
+    suspend fun deleteCartProduct(id: Int) = cartDao.deleteProduct(id)
 
     suspend fun deleteAllProducts() = cartDao.deleteAllProducts()
 

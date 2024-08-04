@@ -27,7 +27,15 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             _cartUiState.value =
                 _cartUiState.value.copy(isLoading = false, errorMessage = e.message)
         }
+    }
 
+    fun deleteCartProduct(id: Int) = viewModelScope.launch {
+        try {
+            cartRepository.deleteCartProduct(id)
+        } catch (e: Exception) {
+            _cartUiState.value =
+                _cartUiState.value.copy(isLoading = false, errorMessage = e.message)
+        }
     }
 
 }
