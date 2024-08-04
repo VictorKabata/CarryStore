@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -8,14 +7,14 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinX.serialization)
-    // alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.sqlDelight)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
-    androidTarget{
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -76,12 +75,12 @@ kotlin {
             implementation(libs.kotlin.test)
         }
 
-        sourceSets["androidMain"].dependencies{
+        sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
             implementation(libs.sqlDelight.android)
         }
 
-        sourceSets["iosMain"].dependencies{
+        sourceSets["iosMain"].dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)
         }
@@ -100,11 +99,11 @@ android {
     }
 }
 
-/*sqldelight {
+sqldelight {
     databases {
         create("AppDatabase") {
             packageName.set("com.vickbt.shared.data.cache.sqldelight")
             srcDirs.setFrom("src/commonMain/kotlin")
         }
     }
-}*/
+}
