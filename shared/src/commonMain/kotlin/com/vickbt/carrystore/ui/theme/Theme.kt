@@ -41,15 +41,11 @@ fun CarryStoreTheme(
         context.getAsyncImageLoader()
     }
 
-    KoinApplication(application = {
-        modules(commonModule, platformModule())
-    }) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            // typography = Typography,
-            shapes = Shapes
-        ) {
-            content()
-        }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        // typography = Typography,
+        shapes = Shapes
+    ) {
+        content()
     }
 }

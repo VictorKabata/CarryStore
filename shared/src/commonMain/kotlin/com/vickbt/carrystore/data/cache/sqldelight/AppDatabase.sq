@@ -1,9 +1,9 @@
-CREATE TABLE CartEntity(
+CREATE TABLE ProductEntity(
 id INTEGER PRIMARY KEY NOT NULL,
 name TEXT NOT NULL,
 description TEXT NOT NULL,
 price INTEGER NOT NULL,
-currencyCode TEXT DEFAULT NULL,
+currencyCode TEXT NOT NULL,
 currencySymbol TEXT NOT NULL,
 quantity INTEGER DEFAULT NULL,
 imageLocation TEXT NOT NULL,
@@ -11,24 +11,24 @@ status TEXT DEFAULT NULL
 );
 
 insertProduct:
-INSERT OR REPLACE INTO CartEntity(id, name,description,price,currencyCode,currencySymbol, quantity, imageLocation, status)
+INSERT OR REPLACE INTO ProductEntity(id, name,description,price,currencyCode,currencySymbol, quantity, imageLocation, status)
 VALUES (?,?,?,?,?,?,?,?,?);
 
 getAllProducts:
-SELECT * FROM CartEntity;
+SELECT * FROM ProductEntity;
 
 getProduct:
-SELECT * FROM CartEntity
+SELECT * FROM ProductEntity
 WHERE id=?;
 
 deleteProduct:
-DELETE FROM CartEntity
+DELETE FROM ProductEntity
 WHERE id=?;
 
 deleteAllProducts:
-DELETE FROM CartEntity;
+DELETE FROM ProductEntity;
 
 isProductInCart:
 SELECT COUNT(1)
-FROM CartEntity
+FROM ProductEntity
 WHERE id=?;
