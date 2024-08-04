@@ -6,7 +6,7 @@ price INTEGER NOT NULL,
 currencyCode TEXT DEFAULT NULL,
 currencySymbol TEXT NOT NULL,
 quantity INTEGER DEFAULT NULL,
-imageLocation REAL NOT NULL,
+imageLocation TEXT NOT NULL,
 status TEXT DEFAULT NULL
 );
 
