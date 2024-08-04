@@ -6,14 +6,9 @@ import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
-/*
-class DiHelper {
-    fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
+actual class DiHelper(val appDeclaration: KoinAppDeclaration = {}) {
+    actual fun initKoin(): KoinApplication = startKoin {
         appDeclaration()
         modules(commonModule, platformModule())
     }
-}*/
-
-expect class DiHelper {
-    fun initKoin():KoinApplication
 }

@@ -4,16 +4,9 @@ import com.vickbt.carrystore.di.commonModule
 import com.vickbt.carrystore.di.platformModule
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
-import org.koin.dsl.KoinAppDeclaration
 
-/*
-class DiHelper {
-    fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
-        appDeclaration()
+actual class DiHelper {
+    actual fun initKoin(): KoinApplication = startKoin{
         modules(commonModule, platformModule())
     }
-}*/
-
-expect class DiHelper {
-    fun initKoin():KoinApplication
 }
