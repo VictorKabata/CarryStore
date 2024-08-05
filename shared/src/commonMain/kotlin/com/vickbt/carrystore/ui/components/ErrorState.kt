@@ -3,9 +3,11 @@ package com.vickbt.carrystore.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +24,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ErrorState(
     modifier: Modifier,
-    errorIcon: ImageVector = Icons.Rounded.Person,
+    errorIcon: ImageVector = Icons.Rounded.Error,
     errorMessage: String,
     actionMessage: String? = null,
     action: () -> Unit = {}
@@ -33,17 +35,27 @@ fun ErrorState(
         verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(modifier = Modifier.size(100.dp), imageVector = errorIcon, contentDescription = null)
+        Icon(
+            modifier = Modifier.size(150.dp),
+            imageVector = errorIcon,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurface
+        )
 
         Text(text = errorMessage, fontSize = 16.sp, textAlign = TextAlign.Center)
 
         actionMessage?.let {
             Button(
-                modifier = Modifier,
+                modifier = Modifier.fillMaxWidth(.60f).padding(vertical = 6.dp),
                 onClick = { action() },
-                shape = MaterialTheme.shapes.medium
+                shape = MaterialTheme.shapes.extraLarge
             ) {
-                Text(text = it, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                Text(
+                    modifier = Modifier.padding(vertical = 6.dp),
+                    text = it,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
             }
         }
 

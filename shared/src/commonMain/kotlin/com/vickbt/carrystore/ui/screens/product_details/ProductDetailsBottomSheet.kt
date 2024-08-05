@@ -132,7 +132,7 @@ fun ProductBottomSheet(
                 Button(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
                     onClick = { onAddToCartClicked(product) },
-                    shape = MaterialTheme.shapes.large
+                    shape = MaterialTheme.shapes.extraLarge
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
@@ -146,7 +146,7 @@ fun ProductBottomSheet(
                 Button(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
                     onClick = { onBuyNowClicked(product) },
-                    shape = MaterialTheme.shapes.large,
+                    shape = MaterialTheme.shapes.extraLarge,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.surface,
                         contentColor = MaterialTheme.colorScheme.onSurface

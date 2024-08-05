@@ -6,6 +6,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -64,7 +65,7 @@ fun Counter(
         }
 
         Text(
-            modifier = Modifier,
+            modifier = Modifier.padding(horizontal = 8.dp),
             text = count.toString(),
             color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,

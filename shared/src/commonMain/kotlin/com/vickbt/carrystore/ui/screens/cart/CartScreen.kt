@@ -129,7 +129,7 @@ fun CartScreen(
                             onClick = {
                                 viewModel.deleteAllCartProducts()
                             },
-                            shape = MaterialTheme.shapes.large
+                            shape = MaterialTheme.shapes.extraLarge
                         ) {
                             Text(
                                 modifier = Modifier.padding(vertical = 6.dp),
