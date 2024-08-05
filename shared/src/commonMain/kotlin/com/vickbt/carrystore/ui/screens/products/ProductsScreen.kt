@@ -65,6 +65,8 @@ fun ProductsScreen(
 
     val scope = rememberCoroutineScope()
 
+    var cartQuantity by remember { mutableStateOf(1) }
+
     Scaffold(modifier = Modifier.padding(paddingValues)) {
         BottomSheetScaffold(
             scaffoldState = bottomSheetScaffoldState,
@@ -80,8 +82,12 @@ fun ProductsScreen(
                                 }
                             },
                         product = product,
+                        onItemCountChanged = { newValue ->
+                            println("Victor New value: $newValue")
+                            cartQuantity = newValue
+                        },
                         onAddToCartClicked = {
-                            viewModel.saveProduct(product = it)
+                            viewModel.saveProduct(product = it.copy(cartQuantity = cartQuantity))
                             scope.launch { sheetState.hide() }
                         },
                         onBuyNowClicked = { scope.launch { sheetState.hide() } }

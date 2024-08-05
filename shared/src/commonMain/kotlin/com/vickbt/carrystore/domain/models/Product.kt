@@ -9,5 +9,7 @@ data class Product(
     val currencySymbol: String,
     val quantity: Int,
     val imageLocation: String,
-    val status: String
+    val status: String,
+    val cartQuantity: Int? = null,
+    val createdAt: String? = null
 )

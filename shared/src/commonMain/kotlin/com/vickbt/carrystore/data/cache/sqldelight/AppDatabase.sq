@@ -7,15 +7,18 @@ currencyCode TEXT NOT NULL,
 currencySymbol TEXT NOT NULL,
 quantity INTEGER NOT NULL,
 imageLocation TEXT NOT NULL,
-status TEXT NOT NULL
+status TEXT NOT NULL,
+cartQuantity INTEGER DEFAULT NULL,
+createdAt TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 insertProduct:
-INSERT OR REPLACE INTO ProductEntity(id, name,description,price,currencyCode,currencySymbol, quantity, imageLocation, status)
-VALUES (?,?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO ProductEntity(id, name,description,price,currencyCode,currencySymbol, quantity, imageLocation, status, cartQuantity, createdAt)
+VALUES (?,?,?,?,?,?,?,?,?, ?,?);
 
 getAllProducts:
 SELECT * FROM ProductEntity;
+ORDER BY createdAt DESC;
 
 getProduct:
 SELECT * FROM ProductEntity

@@ -25,7 +25,9 @@ class CartDao(private val databaseDriverFactory: DatabaseDriverFactory) {
                 currencySymbol = product.currencySymbol,
                 quantity = product.quantity.toLong(),
                 imageLocation = product.imageLocation,
-                status = product.status
+                status = product.status,
+                cartQuantity = product.cartQuantity?.toLong(),
+                createdAt = product.createdAt
             )
         }
     }

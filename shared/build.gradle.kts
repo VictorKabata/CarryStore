@@ -45,10 +45,11 @@ kotlin {
     sourceSets {
         sourceSets["commonMain"].dependencies {
             // Jetpack Compose - UI
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material3)
-            api(compose.components.resources)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+            implementation(compose.materialIconsExtended)
 
             implementation(libs.coroutines)
 
