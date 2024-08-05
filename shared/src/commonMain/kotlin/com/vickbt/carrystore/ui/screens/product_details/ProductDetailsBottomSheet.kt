@@ -58,6 +58,7 @@ fun ProductBottomSheet(
                 alignment = Alignment.Center,
             )
 
+            //region Name & Price
             Row(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -80,7 +81,9 @@ fun ProductBottomSheet(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
+            //endregion
 
+            //region Description title & Description
             Column(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
@@ -100,6 +103,7 @@ fun ProductBottomSheet(
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f)
                 )
             }
+            //endregion
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -117,6 +121,7 @@ fun ProductBottomSheet(
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            //region Add to Cart & Buy Now
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -155,6 +160,7 @@ fun ProductBottomSheet(
                     )
                 }
             }
+            //endregion
         }
 
     }
