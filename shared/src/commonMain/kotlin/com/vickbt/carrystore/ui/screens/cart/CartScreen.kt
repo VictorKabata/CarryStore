@@ -22,9 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -66,21 +63,18 @@ fun CartScreen(
                 navHostController.navigate(NavigationItem.Products.route)
             }
         } else {
-//            val cartSubTotal by remember { mutableStateOf(cartUiState.products.sumOf { it.price *(it.cartQuantity?:1)}) }
             val subTotal = cartUiState.products.sumOf { it.price * (it.cartQuantity ?: 1) }
-            val currencyCode by remember {
-                mutableStateOf(cartUiState.products.groupBy { it.currencyCode }
-                    .maxBy { it.value.size }.key)
-            }
+            val currencyCode =
+                cartUiState.products.groupBy { it.currencyCode }.maxBy { it.value.size }.key
 
-            Box(
-                modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
-            ) {
+            Box(modifier = Modifier.fillMaxSize()) {
 
-                LazyColumn(modifier = Modifier.align(Alignment.TopCenter)) {
+                LazyColumn(
+                    modifier = Modifier.align(Alignment.TopCenter)
+                ) {
                     items(items = cartUiState.products) { product ->
                         ItemCartProduct(
-                            modifier = Modifier.padding(vertical = 4.dp),
+                            modifier = Modifier.padding(vertical = 12.dp),
                             product = product,
                             onItemCountChanged = { itemCount ->
                                 viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))
