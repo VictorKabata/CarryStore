@@ -60,7 +60,8 @@ fun ItemProduct(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSecondary
                 )
 
                 Text(
@@ -69,7 +70,8 @@ fun ItemProduct(
                     fontSize = 18.sp,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }

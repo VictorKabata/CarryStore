@@ -74,7 +74,7 @@ fun ProductsScreen(
         BottomSheetScaffold(
             scaffoldState = bottomSheetScaffoldState,
             sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-            sheetContainerColor = MaterialTheme.colorScheme.surface,
+            sheetContainerColor = MaterialTheme.colorScheme.surfaceContainer,
             sheetContent = {
                 selectedProduct?.let { product ->
                     ProductBottomSheet(
@@ -101,10 +101,7 @@ fun ProductsScreen(
             }) {
             Box(modifier = Modifier.fillMaxSize()) {
                 if (productsUiState.isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
-                        trackColor = MaterialTheme.colorScheme.primary
-                    )
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
                     ErrorState(
                         modifier = Modifier.align(Alignment.Center),
