@@ -58,9 +58,9 @@ fun CartScreen(
                     ItemCartProduct(
                         modifier = Modifier.padding(vertical = 4.dp),
                         product = product,
-                        onClickDelete = { viewModel.deleteCartProduct(id = product.id) }) {
-                        navHostController.navigate("product/${it.id}/${it.name}/${it.description}/${it.price}/${it.currencySymbol}/${it.currencyCode}")
-                    }
+                        onClickDelete = { viewModel.deleteCartProduct(id = product.id) },
+                        onClick = {}
+                    )
                 }
             }
         }

@@ -69,8 +69,6 @@ fun ProductsScreen(
 
     val scope = rememberCoroutineScope()
 
-    println("Victor Height: $sheetContentHeight")
-
     Scaffold(modifier = Modifier.padding(paddingValues)){
         BottomSheetScaffold(
             // modifier = Modifier.padding(paddingValues),
