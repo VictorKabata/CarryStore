@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,7 +33,7 @@ fun ErrorState(
 
     Column(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
@@ -42,19 +43,30 @@ fun ErrorState(
             tint = MaterialTheme.colorScheme.onSurface
         )
 
-        Text(text = errorMessage, fontSize = 16.sp, textAlign = TextAlign.Center)
+        Text(
+            text = errorMessage,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurface
+        )
 
         actionMessage?.let {
             Button(
-                modifier = Modifier.fillMaxWidth(.60f).padding(vertical = 6.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
                 onClick = { action() },
-                shape = MaterialTheme.shapes.extraLarge
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
             ) {
                 Text(
                     modifier = Modifier.padding(vertical = 6.dp),
                     text = it,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
