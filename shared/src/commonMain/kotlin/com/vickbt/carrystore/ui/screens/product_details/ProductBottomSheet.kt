@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.vickbt.carrystore.ui.screens.product_details
 
 import androidx.compose.foundation.BorderStroke
@@ -34,6 +32,7 @@ import com.vickbt.carrystore.domain.models.Product
 fun ProductBottomSheet(
     modifier: Modifier = Modifier,
     product: Product,
+    isItemInCart:Boolean=false,
     onAddToCartClicked: (Product) -> Unit,
     onBuyNowClicked: (Product) -> Unit
 ) {

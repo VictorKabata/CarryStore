@@ -22,7 +22,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -61,40 +60,31 @@ fun ProductsScreen(
 
     var selectedProduct by remember { mutableStateOf<Product?>(null) }
 
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = true
-    )
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     val scope = rememberCoroutineScope()
 
     Scaffold(modifier = Modifier.padding(paddingValues)) {
         BottomSheetScaffold(
-            // modifier = Modifier.padding(paddingValues),
             scaffoldState = bottomSheetScaffoldState,
-            sheetShape = MaterialTheme.shapes.medium,
+            sheetShape = MaterialTheme.shapes.small,
             sheetContainerColor = MaterialTheme.colorScheme.surface,
             sheetContent = {
-                selectedProduct?.let {
+                selectedProduct?.let { product ->
                     ProductBottomSheet(
                         modifier = Modifier.fillMaxWidth().height(sheetContentHeight)
                             .onGloballyPositioned { coordinates ->
                                 sheetContentHeight = with(localDensity) {
-                                    if (sheetState.currentValue == SheetValue.Expanded) {
-                                        coordinates.size.height.toDp()
-                                    } else {
-                                        Dp.Unspecified
-                                    }
+                                    coordinates.size.height.toDp()
                                 }
                             },
-                        product = it,
+                        product = product,
                         onAddToCartClicked = {
                             viewModel.saveProduct(product = it)
                             scope.launch { sheetState.hide() }
                         },
-                        onBuyNowClicked = {
-                            scope.launch { sheetState.hide() }
-                        }
+                        onBuyNowClicked = { scope.launch { sheetState.hide() } }
                     )
                 }
             }) {

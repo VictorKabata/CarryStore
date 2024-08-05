@@ -60,7 +60,7 @@ fun ItemCartProduct(
 
                 Text(
                     modifier = Modifier,
-                    text = "${product.currencySymbol} ${product.price} ",
+                    text = "${product.currencyCode} ${product.price} ",
                     fontSize = 18.sp,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
