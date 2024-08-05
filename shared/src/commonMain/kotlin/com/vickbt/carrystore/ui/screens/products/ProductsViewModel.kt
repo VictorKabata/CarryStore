@@ -21,9 +21,6 @@ class ProductsViewModel(
     private val _products = MutableStateFlow(ProductsUiState(isLoading = true))
     val products = _products.asStateFlow()
 
-    private val _productDetailsUiState = MutableStateFlow(ProductDetailsUiState())
-    val productDetailsUiState = _productDetailsUiState.asStateFlow()
-
     init {
         fetchProducts()
     }
@@ -38,17 +35,11 @@ class ProductsViewModel(
         }
     }
 
-    fun isProductInCart(id: Int) = viewModelScope.launch {
-        cartRepository.isProductInCart(id = id).collectLatest {
-            _productDetailsUiState.update { it.copy(isProductInCart = it.isProductInCart) }
-        }
-    }
-
     fun saveProduct(product: Product) = viewModelScope.launch {
         try {
             cartRepository.saveProduct(product = product)
         } catch (e: Exception) {
-            _productDetailsUiState.update { it.copy(errorMessage = e.message) }
+            _products.update { it.copy(errorMessage = e.message) }
         }
     }
 

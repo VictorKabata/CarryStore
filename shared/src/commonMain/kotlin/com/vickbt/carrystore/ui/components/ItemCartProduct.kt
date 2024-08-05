@@ -1,11 +1,11 @@
 package com.vickbt.carrystore.ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
@@ -15,6 +15,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,11 +34,15 @@ import com.vickbt.carrystore.domain.models.Product
 fun ItemCartProduct(
     modifier: Modifier = Modifier,
     product: Product,
+    onItemCountChanged: (Int) -> Unit,
     onClickDelete: (Int) -> Unit,
-    onClick: (Product) -> Unit
 ) {
 
-    Card(modifier = modifier.clickable { onClick(product) }, shape = MaterialTheme.shapes.medium) {
+    var itemCount by remember { mutableStateOf(product.cartQuantity ?: 1) }
+
+    var totalItemPrice by remember { mutableStateOf(product.price * (product.cartQuantity ?: 1)) }
+
+    Card(modifier = modifier, shape = MaterialTheme.shapes.medium) {
         Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
             AsyncImage(
                 modifier = Modifier.fillMaxSize(.20f).weight(3f),
@@ -60,11 +68,23 @@ fun ItemCartProduct(
 
                 Text(
                     modifier = Modifier,
-                    text = "${product.currencyCode} ${product.price} ",
+                    text = "${product.currencyCode} $totalItemPrice ",
                     fontSize = 18.sp,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold
+                )
+
+                Counter(
+                    modifier = Modifier.fillMaxWidth(.80f),
+                    count = itemCount,
+                    maxCount = product.quantity,
+                    onIncrement = {
+                        onItemCountChanged(itemCount + 1)
+                    },
+                    onDecrement = {
+                        onItemCountChanged(itemCount - 1)
+                    }
                 )
             }
 

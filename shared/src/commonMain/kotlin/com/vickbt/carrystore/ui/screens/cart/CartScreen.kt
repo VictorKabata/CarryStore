@@ -46,7 +46,6 @@ fun CartScreen(
 
     val cartUiState = viewModel.cartUiState.collectAsState().value
 
-
     Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
         if (cartUiState.isLoading) {
             CircularProgressIndicator()
@@ -75,7 +74,6 @@ fun CartScreen(
 
             Box(
                 modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
-                //verticalArrangement = Arrangement.SpaceBetween
             ) {
 
                 LazyColumn(modifier = Modifier.align(Alignment.TopCenter)) {
@@ -83,8 +81,12 @@ fun CartScreen(
                         ItemCartProduct(
                             modifier = Modifier.padding(vertical = 4.dp),
                             product = product,
-                            onClickDelete = { viewModel.deleteCartProduct(id = product.id) },
-                            onClick = {}
+                            onItemCountChanged = { itemCount ->
+                                viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))
+                            },
+                            onClickDelete = {
+                                viewModel.deleteCartProduct(id = product.id)
+                            }
                         )
                     }
                 }

@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class)
 
 package com.vickbt.carrystore.ui.components
 
@@ -6,10 +6,10 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -19,22 +19,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun Counter(
     modifier: Modifier = Modifier,
     count: Int = 1,
     maxCount: Int,
+    countButtonSize: Dp = Dp.Unspecified,
+    countTextSize: TextUnit = 24.sp,
     onIncrement: (Int) -> Unit,
     onDecrement: (Int) -> Unit
 ) {
+
+    val some = 16.sp
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         FloatingActionButton(
-            modifier = Modifier.combinedClickable(
+            modifier = Modifier.size(countButtonSize).combinedClickable(
                 enabled = count >= 1,
                 onClick = { onDecrement(count) },
                 onLongClick = { onDecrement(count) }
@@ -45,8 +53,7 @@ fun Counter(
             onClick = { onDecrement(count) },
         ) {
             Icon(
-                imageVector = if (count == 1) Icons.Rounded.Delete else Icons.Rounded.Remove,
-                contentDescription = null
+                imageVector = Icons.Rounded.Remove, contentDescription = null
             )
         }
 
@@ -55,11 +62,12 @@ fun Counter(
             text = count.toString(),
             color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            fontSize = countTextSize
         )
 
         FloatingActionButton(
-            modifier = Modifier.combinedClickable(
+            modifier = Modifier.size(countButtonSize).combinedClickable(
                 enabled = count < maxCount,
                 onClick = { onIncrement(count) },
                 onLongClick = { onIncrement(count) }
