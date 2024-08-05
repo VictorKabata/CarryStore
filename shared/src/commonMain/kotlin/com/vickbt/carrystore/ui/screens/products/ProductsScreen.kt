@@ -85,7 +85,6 @@ fun ProductsScreen(
                             },
                         product = product,
                         onItemCountChanged = { newValue ->
-                            println("Victor New value: $newValue")
                             cartQuantity = newValue
                         },
                         onAddToCartClicked = {
