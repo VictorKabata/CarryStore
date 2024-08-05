@@ -11,7 +11,7 @@ fun ProductEntity.toDomain(): Product {
         price = price.toInt(),
         currencyCode = currencyCode,
         currencySymbol = currencySymbol,
-        quantity = quantity?.toInt(),
+        quantity = quantity.toInt(),
         imageLocation = imageLocation,
         status = status
     )

@@ -23,7 +23,7 @@ class CartDao(private val databaseDriverFactory: DatabaseDriverFactory) {
                 price = product.price.toLong(),
                 currencyCode = product.currencyCode,
                 currencySymbol = product.currencySymbol,
-                quantity = product.quantity?.toLong(),
+                quantity = product.quantity.toLong(),
                 imageLocation = product.imageLocation,
                 status = product.status
             )
