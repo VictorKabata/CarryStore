@@ -17,7 +17,7 @@ INSERT OR REPLACE INTO ProductEntity(id, name,description,price,currencyCode,cur
 VALUES (?,?,?,?,?,?,?,?,?, ?,?);
 
 getAllProducts:
-SELECT * FROM ProductEntity;
+SELECT * FROM ProductEntity
 ORDER BY createdAt DESC;
 
 getProduct:

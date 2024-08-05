@@ -1,6 +1,6 @@
 @file:OptIn(
     KoinExperimentalAPI::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
 )
 
 package com.vickbt.carrystore.ui.screens.products
