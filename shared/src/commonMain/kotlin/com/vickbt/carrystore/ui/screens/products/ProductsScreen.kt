@@ -24,7 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.rememberBottomSheetScaffoldState
-import androidx.compose.material3.rememberStandardBottomSheetState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -61,15 +61,14 @@ fun ProductsScreen(
 
     var selectedProduct by remember { mutableStateOf<Product?>(null) }
 
-    val sheetState = rememberStandardBottomSheetState(
-        initialValue = if (selectedProduct != null) SheetValue.Expanded else SheetValue.Hidden,
-        skipHiddenState = false
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
     )
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     val scope = rememberCoroutineScope()
 
-    Scaffold(modifier = Modifier.padding(paddingValues)){
+    Scaffold(modifier = Modifier.padding(paddingValues)) {
         BottomSheetScaffold(
             // modifier = Modifier.padding(paddingValues),
             scaffoldState = bottomSheetScaffoldState,
@@ -114,13 +113,16 @@ fun ProductsScreen(
                         modifier = Modifier.fillMaxSize().align(Alignment.Center),
                         columns = GridCells.Fixed(2),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                        horizontalArrangement = Arrangement.spacedBy(
+                            8.dp,
+                            Alignment.CenterHorizontally
+                        )
                     ) {
                         items(productsUiState.products ?: emptyList()) { product ->
                             ItemProduct(modifier = Modifier, product = product) {
-                                selectedProduct = product
                                 scope.launch {
                                     if (!sheetState.isVisible) {
+                                        selectedProduct = product
                                         sheetState.expand()
                                     } else {
                                         sheetState.hide()
