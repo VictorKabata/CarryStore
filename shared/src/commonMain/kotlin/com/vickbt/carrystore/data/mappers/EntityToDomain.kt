@@ -8,11 +8,13 @@ fun ProductEntity.toDomain(): Product {
         id = id.toInt(),
         name = name,
         description = description,
-        price = price.toInt(),
+        price = price.toDouble(),
         currencyCode = currencyCode,
         currencySymbol = currencySymbol,
-        quantity = quantity?.toInt(),
+        quantity = quantity.toInt(),
         imageLocation = imageLocation,
-        status = status
+        status = status,
+        cartQuantity = cartQuantity?.toInt(),
+        createdAt = createdAt
     )
 }

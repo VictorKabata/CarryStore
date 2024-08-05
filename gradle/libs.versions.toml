@@ -6,7 +6,7 @@ ktLint = "11.5.1"
 detekt = "1.19.0"
 
 # Kotlin Multiplatform Version
-composeMultiplatform = "1.6.11"
+composeMultiplatform = "1.7.0-alpha02"
 koinCore = "3.5.6"
 koinCompose = "1.1.5"
 koinAndroid = "3.5.6"

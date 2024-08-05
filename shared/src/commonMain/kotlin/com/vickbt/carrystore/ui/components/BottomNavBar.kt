@@ -1,6 +1,8 @@
 package com.vickbt.carrystore.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -18,6 +20,7 @@ import com.vickbt.carrystore.ui.theme.Gray
 fun BottomNavBar(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
+    cartItemCount: Int = 0,
     bottomNavItems: List<NavigationItem>
 ) {
     NavigationBar(
@@ -32,10 +35,18 @@ fun BottomNavBar(
 
             NavigationBarItem(
                 icon = {
-                    Icon(
-                        imageVector = item.icon!!,
-                        contentDescription = item.title
-                    )
+                    BadgedBox(badge = {
+                        if (item == NavigationItem.Cart && cartItemCount > 0) {
+                            Badge {
+                                Text(text = cartItemCount.toString())
+                            }
+                        }
+                    }) {
+                        Icon(
+                            imageVector = item.icon,
+                            contentDescription = item.title
+                        )
+                    }
                 },
                 label = { Text(text = item.title) },
                 alwaysShowLabel = true,

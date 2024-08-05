@@ -60,7 +60,7 @@ fun ItemProduct(
 
             Text(
                 modifier = Modifier.padding(horizontal = 4.dp),
-                text = "${product.price} ${product.currencyCode}",
+                text = "${product.currencyCode} ${product.price}",
                 fontSize = 18.sp,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start,
