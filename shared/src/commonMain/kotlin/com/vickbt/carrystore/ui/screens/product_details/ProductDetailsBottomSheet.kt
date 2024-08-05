@@ -1,5 +1,3 @@
-@file:OptIn(KoinExperimentalAPI::class)
-
 package com.vickbt.carrystore.ui.screens.product_details
 
 import androidx.compose.foundation.BorderStroke
@@ -29,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.Counter
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun ProductBottomSheet(
@@ -93,7 +90,7 @@ fun ProductBottomSheet(
                 Text(
                     modifier = Modifier,
                     text = "Description",
-                    fontSize = 16.sp,
+                    fontSize = 18.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.ExtraBold,
@@ -103,7 +100,7 @@ fun ProductBottomSheet(
                 Text(
                     modifier = Modifier,
                     text = product.description,
-                    fontSize = 14.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f)
                 )

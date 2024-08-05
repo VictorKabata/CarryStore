@@ -54,9 +54,9 @@ fun Counter(
             enabled = count > 1,
             colors = IconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
+                contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
-                disabledContentColor = Color.Black
+                disabledContentColor = Color.White
             ),
             onClick = { onDecrement(count) }) {
             Icon(
@@ -84,9 +84,9 @@ fun Counter(
             enabled = count < maxCount,
             colors = IconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
+                contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
-                disabledContentColor = Color.Black
+                disabledContentColor = Color.White
             ),
             onClick = { onIncrement(count) }) {
             Icon(
