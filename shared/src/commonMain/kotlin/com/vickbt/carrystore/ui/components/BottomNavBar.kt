@@ -37,7 +37,10 @@ fun BottomNavBar(
                 icon = {
                     BadgedBox(badge = {
                         if (item == NavigationItem.Cart && cartItemCount > 0) {
-                            Badge {
+                            Badge(
+                                containerColor = MaterialTheme.colorScheme.primary.copy(alpha = .6f),
+                                contentColor = MaterialTheme.colorScheme.onPrimary
+                            ) {
                                 Text(text = cartItemCount.toString())
                             }
                         }
@@ -52,7 +55,8 @@ fun BottomNavBar(
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = Gray
+                    unselectedIconColor = Gray,
+                    indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = .20f)
                 ),
                 selected = isSelected,
                 onClick = {

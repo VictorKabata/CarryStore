@@ -16,7 +16,10 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun AppBar(title: String) {
     TopAppBar(
-        colors = TopAppBarDefaults.mediumTopAppBarColors(MaterialTheme.colorScheme.surface),
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            titleContentColor = MaterialTheme.colorScheme.onSurface
+        ),
         title = {
             Text(
                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
