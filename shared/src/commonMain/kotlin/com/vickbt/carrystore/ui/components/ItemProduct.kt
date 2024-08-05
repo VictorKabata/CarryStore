@@ -48,24 +48,30 @@ fun ItemProduct(
                 alignment = Alignment.Center,
             )
 
-            Text(
-                modifier = Modifier.padding(horizontal = 4.dp),
-                text = product.name,
-                fontSize = 16.sp,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Medium
-            )
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(all = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    text = product.name,
+                    fontSize = 16.sp,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Medium
+                )
 
-            Text(
-                modifier = Modifier.padding(horizontal = 4.dp),
-                text = "${product.currencyCode} ${product.price}",
-                fontSize = 18.sp,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold
-            )
+                Text(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    text = "${product.currencyCode} ${product.price}",
+                    fontSize = 18.sp,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
     }
 

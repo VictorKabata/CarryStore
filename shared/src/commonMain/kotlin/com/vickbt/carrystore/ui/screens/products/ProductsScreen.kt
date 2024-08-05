@@ -17,7 +17,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -94,26 +94,24 @@ fun ProductsScreen(
                         },
                         onBuyNowClicked = { scope.launch { sheetState.hide() } },
                         itemCount = itemCount,
-                        onDecrement = {
-                            if (itemCount > 0) {
-                                itemCount--
-                            }
-                        },
-                        onIncrement = {
-                            itemCount++
-                        }
+                        onDecrement = { itemCount-- },
+                        onIncrement = { itemCount++ }
                     )
                 }
             }) {
             Box(modifier = Modifier.fillMaxSize()) {
                 if (productsUiState.isLoading) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center),
+                        trackColor = MaterialTheme.colorScheme.primary
+                    )
                 } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
                     ErrorState(
                         modifier = Modifier.align(Alignment.Center),
-                        errorIcon = Icons.Rounded.Person,
+                        errorIcon = Icons.Rounded.Error,
                         errorMessage = productsUiState.errorMessage,
-                        actionMessage = "Reload"
+                        actionMessage = "Reload",
+                        action = { viewModel.fetchProducts() }
                     )
                 } else {
                     LazyVerticalGrid(
@@ -126,16 +124,19 @@ fun ProductsScreen(
                         )
                     ) {
                         items(productsUiState.products ?: emptyList()) { product ->
-                            ItemProduct(modifier = Modifier, product = product) {
-                                scope.launch {
-                                    if (!sheetState.isVisible) {
-                                        selectedProduct = product
-                                        sheetState.expand()
-                                    } else {
-                                        sheetState.hide()
+                            ItemProduct(modifier = Modifier,
+                                product = product,
+                                onClick = {
+                                    scope.launch {
+                                        if (!sheetState.isVisible) {
+                                            selectedProduct = product
+                                            sheetState.expand()
+                                        } else {
+                                            sheetState.hide()
+                                        }
                                     }
                                 }
-                            }
+                            )
                         }
                     }
                 }
