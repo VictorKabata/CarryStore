@@ -66,7 +66,7 @@ fun CartScreen(
                 navHostController.navigate(NavigationItem.Products.route)
             }
         } else {
-            val cartSubTotal by remember { mutableStateOf(cartUiState.products.sumOf { it.price }) }
+            val cartSubTotal by remember { mutableStateOf(cartUiState.products.sumOf { it.price *(it.cartQuantity?:1)}) }
             val currencyCode by remember {
                 mutableStateOf(cartUiState.products.groupBy { it.currencyCode }
                     .maxBy { it.value.size }.key)
@@ -82,6 +82,7 @@ fun CartScreen(
                             modifier = Modifier.padding(vertical = 4.dp),
                             product = product,
                             onItemCountChanged = { itemCount ->
+                                println("Victor Cart on item changed: $itemCount")
                                 viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))
                             },
                             onClickDelete = {

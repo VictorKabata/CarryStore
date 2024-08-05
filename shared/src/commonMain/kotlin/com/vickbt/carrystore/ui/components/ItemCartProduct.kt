@@ -79,11 +79,13 @@ fun ItemCartProduct(
                     modifier = Modifier.fillMaxWidth(.80f),
                     count = itemCount,
                     maxCount = product.quantity,
+                    countButtonSize = 32.dp,
+                    countTextSize = 16.sp,
                     onIncrement = {
-                        onItemCountChanged(itemCount + 1)
+                        onItemCountChanged(it+1)
                     },
                     onDecrement = {
-                        onItemCountChanged(itemCount - 1)
+                        onItemCountChanged(it - 1)
                     }
                 )
             }
