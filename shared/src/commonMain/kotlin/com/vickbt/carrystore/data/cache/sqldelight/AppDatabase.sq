@@ -30,8 +30,3 @@ WHERE id=?;
 
 deleteAllProducts:
 DELETE FROM ProductEntity;
-
-isProductInCart:
-SELECT COUNT(1)
-FROM ProductEntity
-WHERE id=?;

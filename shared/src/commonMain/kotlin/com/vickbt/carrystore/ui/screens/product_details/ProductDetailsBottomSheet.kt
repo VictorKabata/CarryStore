@@ -1,3 +1,5 @@
+@file:OptIn(KoinExperimentalAPI::class)
+
 package com.vickbt.carrystore.ui.screens.product_details
 
 import androidx.compose.foundation.BorderStroke
@@ -17,10 +19,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -31,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.Counter
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun ProductBottomSheet(
@@ -41,12 +40,10 @@ fun ProductBottomSheet(
     onAddToCartClicked: (Product) -> Unit,
     onBuyNowClicked: (Product) -> Unit,
     onIncrement: () -> Unit,
-    onDecrement: () -> Unit
+    onDecrement: () -> Unit,
 ) {
 
     val columnScrollState = rememberScrollState()
-
-//    var itemCount by remember { mutableStateOf(product.cartQuantity ?: 1) }
 
     Box(modifier = modifier) {
         Column(

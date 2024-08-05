@@ -8,13 +8,14 @@ import com.vickbt.carrystore.utils.DatabaseDriverFactory
 import com.vickbt.shared.data.cache.sqldelight.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 
 class CartDao(private val databaseDriverFactory: DatabaseDriverFactory) {
 
     private val appDatabase = AppDatabase(databaseDriverFactory.createDriver())
     val dbQuery = appDatabase.appDatabaseQueries
 
-    fun saveProduct(product: Product) {
+    suspend fun saveProduct(product: Product) = withContext(Dispatchers.IO) {
         dbQuery.transaction {
             dbQuery.insertProduct(
                 id = product.id.toLong(),
@@ -37,11 +38,12 @@ class CartDao(private val databaseDriverFactory: DatabaseDriverFactory) {
     fun getProduct(id: Int) =
         dbQuery.getProduct(id = id.toLong()).asFlow().mapToOneOrNull(Dispatchers.IO)
 
-    fun deleteProduct(id: Int) = dbQuery.deleteProduct(id = id.toLong())
+    suspend fun deleteProduct(id: Int) = withContext(Dispatchers.IO) {
+        dbQuery.deleteProduct(id = id.toLong())
+    }
 
-    fun deleteAllProducts() = dbQuery.deleteAllProducts()
-
-    fun isProductInCart(id: Int) =
-        dbQuery.isProductInCart(id = id.toLong()).asFlow().mapToOneOrNull(Dispatchers.IO)
+    suspend fun deleteAllProducts() = withContext(Dispatchers.IO) {
+        dbQuery.deleteAllProducts()
+    }
 
 }

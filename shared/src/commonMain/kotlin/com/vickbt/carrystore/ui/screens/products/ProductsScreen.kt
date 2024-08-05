@@ -38,7 +38,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemProduct
@@ -49,7 +48,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun ProductsScreen(
-    navHostController: NavHostController,
     paddingValues: PaddingValues = PaddingValues(),
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
@@ -69,10 +67,7 @@ fun ProductsScreen(
     var cartQuantity by remember { mutableStateOf(1) }
     var itemCount by remember { mutableStateOf(0) }
 
-   LaunchedEffect(!bottomSheetScaffoldState.bottomSheetState.isVisible){
-       itemCount = 0
-   }
-
+    LaunchedEffect(!sheetState.isVisible) { itemCount = 1 }
 
     Scaffold(modifier = Modifier.padding(paddingValues)) {
         BottomSheetScaffold(

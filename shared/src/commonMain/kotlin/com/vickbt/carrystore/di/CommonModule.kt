@@ -27,7 +27,6 @@ val commonModule = module {
 
     viewModelOf(::MainScreenViewModel)
     viewModelOf(::ProductsViewModel)
-    viewModelOf(::ProductDetailsViewModel)
     viewModelOf(::CartViewModel)
 }
 

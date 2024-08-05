@@ -12,7 +12,7 @@ data class ProductsUiState(
 
 data class ProductDetailsUiState(
     val errorMessage: String? = null,
-    val isProductInCart: Boolean = false,
+    val product: Product? = null,
 )
 
 data class CartUiState(
