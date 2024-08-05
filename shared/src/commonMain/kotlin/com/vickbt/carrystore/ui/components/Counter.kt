@@ -11,17 +11,18 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Remove
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -34,24 +35,24 @@ fun Counter(
     onIncrement: (Int) -> Unit,
     onDecrement: (Int) -> Unit
 ) {
-
-    val some = 16.sp
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        FloatingActionButton(
-            modifier = Modifier.size(countButtonSize).combinedClickable(
-                enabled = count >= 1,
+        ElevatedButton(modifier = Modifier
+            .size(countButtonSize)
+            .combinedClickable(
                 onClick = { onDecrement(count) },
-                onLongClick = { onDecrement(count) }
-            ),
+                onLongClick = { onDecrement(count) }),
             shape = CircleShape,
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            onClick = { onDecrement(count) },
-        ) {
+            enabled = count > 1,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                disabledContainerColor = Color.Gray,
+            ),
+            onClick = { onDecrement(count) }) {
             Icon(
                 imageVector = Icons.Rounded.Remove, contentDescription = null
             )
@@ -66,18 +67,22 @@ fun Counter(
             fontSize = countTextSize
         )
 
-        FloatingActionButton(
-            modifier = Modifier.size(countButtonSize).combinedClickable(
-                enabled = count < maxCount,
+        ElevatedButton(modifier = Modifier
+            .size(countButtonSize)
+            .combinedClickable(
                 onClick = { onIncrement(count) },
-                onLongClick = { onIncrement(count) }
-            ),
-            onClick = { if (count < maxCount) onIncrement(count) },
+                onLongClick = { onIncrement(count) }),
             shape = CircleShape,
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
-        ) {
-            Icon(imageVector = Icons.Rounded.Add, contentDescription = null)
+            enabled = count < maxCount,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                disabledContainerColor = Color.Gray,
+            ),
+            onClick = { onIncrement(count) }) {
+            Icon(
+                imageVector = Icons.Rounded.Add, contentDescription = null
+            )
         }
     }
 }

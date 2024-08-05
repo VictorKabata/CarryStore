@@ -38,9 +38,8 @@ fun ItemCartProduct(
     onClickDelete: (Int) -> Unit,
 ) {
 
-    var itemCount by remember { mutableStateOf(product.cartQuantity ?: 1) }
-
-    var totalItemPrice by remember { mutableStateOf(product.price * (product.cartQuantity ?: 1)) }
+    val itemCount by remember { mutableStateOf(product.cartQuantity ?: 1) }
+    val totalItemPrice by remember { mutableStateOf(product.price * (product.cartQuantity ?: 1)) }
 
     Card(modifier = modifier, shape = MaterialTheme.shapes.medium) {
         Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
@@ -54,7 +53,8 @@ fun ItemCartProduct(
 
             Column(
                 modifier = Modifier.fillMaxHeight().padding(horizontal = 8.dp).weight(6f),
-                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
+                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start
             ) {
                 Text(
                     modifier = Modifier,
@@ -76,7 +76,7 @@ fun ItemCartProduct(
                 )
 
                 Counter(
-                    modifier = Modifier.fillMaxWidth(.80f),
+                    modifier = Modifier.fillMaxWidth(),
                     count = itemCount,
                     maxCount = product.quantity,
                     countButtonSize = 32.dp,
