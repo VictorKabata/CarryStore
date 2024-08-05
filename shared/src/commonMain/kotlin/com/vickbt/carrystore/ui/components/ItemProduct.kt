@@ -3,6 +3,7 @@ package com.vickbt.carrystore.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -40,7 +41,7 @@ fun ItemProduct(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             AsyncImage(
-                modifier = Modifier.fillMaxSize(.60f),
+                modifier = Modifier.fillMaxHeight(.60f).fillMaxWidth(),
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
