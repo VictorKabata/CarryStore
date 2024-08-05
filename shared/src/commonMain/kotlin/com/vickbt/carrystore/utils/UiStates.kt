@@ -2,6 +2,8 @@ package com.vickbt.carrystore.utils
 
 import com.vickbt.carrystore.domain.models.Product
 
+data class MainUiState(val cartItemCount: Int = 0, val errorMessage: String? = null)
+
 data class ProductsUiState(
     val isLoading: Boolean = true,
     val errorMessage: String? = null,
