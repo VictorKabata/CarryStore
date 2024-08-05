@@ -36,14 +36,17 @@ import com.vickbt.carrystore.ui.components.Counter
 fun ProductBottomSheet(
     modifier: Modifier = Modifier,
     product: Product,
+    itemCount: Int,
     onItemCountChanged: (Int) -> Unit,
     onAddToCartClicked: (Product) -> Unit,
-    onBuyNowClicked: (Product) -> Unit
+    onBuyNowClicked: (Product) -> Unit,
+    onIncrement: () -> Unit,
+    onDecrement: () -> Unit
 ) {
 
     val columnScrollState = rememberScrollState()
 
-    var itemCount by remember { mutableStateOf(product.cartQuantity ?: 1) }
+//    var itemCount by remember { mutableStateOf(product.cartQuantity ?: 1) }
 
     Box(modifier = modifier) {
         Column(
@@ -112,10 +115,12 @@ fun ProductBottomSheet(
                 count = itemCount,
                 maxCount = product.quantity,
                 onIncrement = {
-                    onItemCountChanged(itemCount++)
+                    onItemCountChanged(itemCount.plus(1))
+                    onIncrement()
                 },
                 onDecrement = {
-                    onItemCountChanged(itemCount--)
+                    onItemCountChanged(itemCount.minus(1))
+                    onDecrement()
                 }
             )
 

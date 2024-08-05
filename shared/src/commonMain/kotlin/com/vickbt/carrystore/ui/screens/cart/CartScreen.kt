@@ -66,7 +66,8 @@ fun CartScreen(
                 navHostController.navigate(NavigationItem.Products.route)
             }
         } else {
-            val cartSubTotal by remember { mutableStateOf(cartUiState.products.sumOf { it.price *(it.cartQuantity?:1)}) }
+//            val cartSubTotal by remember { mutableStateOf(cartUiState.products.sumOf { it.price *(it.cartQuantity?:1)}) }
+            val subTotal = cartUiState.products.sumOf { it.price *(it.cartQuantity?:1) }
             val currencyCode by remember {
                 mutableStateOf(cartUiState.products.groupBy { it.currencyCode }
                     .maxBy { it.value.size }.key)
@@ -116,7 +117,7 @@ fun CartScreen(
                             )
 
                             Text(
-                                text = "$currencyCode $cartSubTotal",
+                                text = "$currencyCode $subTotal",
                                 fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface,

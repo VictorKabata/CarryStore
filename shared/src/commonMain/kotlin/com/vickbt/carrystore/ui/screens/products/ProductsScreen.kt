@@ -25,6 +25,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -66,6 +67,12 @@ fun ProductsScreen(
     val scope = rememberCoroutineScope()
 
     var cartQuantity by remember { mutableStateOf(1) }
+    var itemCount by remember { mutableStateOf(0) }
+
+   LaunchedEffect(!bottomSheetScaffoldState.bottomSheetState.isVisible){
+       itemCount = 0
+   }
+
 
     Scaffold(modifier = Modifier.padding(paddingValues)) {
         BottomSheetScaffold(
@@ -90,7 +97,16 @@ fun ProductsScreen(
                             viewModel.saveProduct(product = it.copy(cartQuantity = cartQuantity))
                             scope.launch { sheetState.hide() }
                         },
-                        onBuyNowClicked = { scope.launch { sheetState.hide() } }
+                        onBuyNowClicked = { scope.launch { sheetState.hide() } },
+                        itemCount = itemCount,
+                        onDecrement = {
+                            if (itemCount > 0) {
+                                itemCount--
+                            }
+                        },
+                        onIncrement = {
+                            itemCount++
+                        }
                     )
                 }
             }) {
