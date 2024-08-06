@@ -75,10 +75,11 @@ kotlin {
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
+            implementation(libs.coroutines.test)
+            implementation(libs.ktor.mock)
             implementation(libs.assertK)
             implementation(libs.sqlDelight.sqliteDriver)
             implementation(libs.turbine)
-            implementation(libs.coroutines.test)
         }
 
         sourceSets["androidMain"].dependencies {

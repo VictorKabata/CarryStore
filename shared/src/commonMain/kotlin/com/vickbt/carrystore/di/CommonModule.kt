@@ -4,6 +4,7 @@ import com.vickbt.carrystore.data.cache.sqldelight.daos.CartDao
 import com.vickbt.carrystore.data.datasources.CartRepository
 import com.vickbt.carrystore.data.datasources.ProductsRepository
 import com.vickbt.carrystore.data.network.ApiService
+import com.vickbt.carrystore.data.network.ApiServiceImpl
 import com.vickbt.carrystore.data.network.NetworkClient
 import com.vickbt.carrystore.ui.screens.cart.CartViewModel
 import com.vickbt.carrystore.ui.screens.main.MainScreenViewModel
@@ -17,7 +18,7 @@ val commonModule = module {
 
     single { NetworkClient.httpClient }
 
-    singleOf(::ApiService)
+    single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
     singleOf(::CartDao)
 
