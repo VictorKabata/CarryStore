@@ -70,11 +70,12 @@ fun CartScreen(
             Box(modifier = Modifier.fillMaxSize()) {
 
                 LazyColumn(
-                    modifier = Modifier.align(Alignment.TopCenter)
+                    modifier = Modifier.align(Alignment.TopCenter),
+                    contentPadding = PaddingValues(horizontal = 12.dp)
                 ) {
                     items(items = cartUiState.products) { product ->
                         ItemCartProduct(
-                            modifier = Modifier.padding(vertical = 12.dp),
+                            modifier = Modifier.padding(vertical = 6.dp),
                             product = product,
                             onItemCountChanged = { itemCount ->
                                 viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))

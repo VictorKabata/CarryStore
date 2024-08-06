@@ -37,7 +37,7 @@ fun ItemCartProduct(
 
     Card(modifier = modifier, shape = MaterialTheme.shapes.small) {
         Row(
-            modifier = Modifier.fillMaxSize().padding(2.dp),
+            modifier = Modifier.fillMaxSize().padding(4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
