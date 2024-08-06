@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
 
     alias(libs.plugins.detekt)
-    // alias(libs.plugins.ktLint)
+    alias(libs.plugins.ktLint)
 }
 
 subprojects {
@@ -19,7 +19,7 @@ subprojects {
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
 
-    /**apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         debug.set(true)
         verbose.set(true)
@@ -30,5 +30,5 @@ subprojects {
             enableExperimentalRules.set(true)
             exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
         }
-    }*/
+    }
 }
