@@ -7,6 +7,7 @@
         android:name=".CarryStoreApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
+        android:label="Carry Store"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.MainActivity"

@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.0"
 #agp = "8.5.1"
-agp="8.1.0"
+agp = "8.1.0"
 ktLint = "11.5.1"
 detekt = "1.19.0"
 
@@ -96,5 +96,5 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
 coil = ["coil-compose", "coil-compose-core", "coil-ktor", "coil-multiplatform"]
-firebase=["firebase-analytics", "firebase-crashlytics", "firebase-performance"]
+firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-performance"]
 
