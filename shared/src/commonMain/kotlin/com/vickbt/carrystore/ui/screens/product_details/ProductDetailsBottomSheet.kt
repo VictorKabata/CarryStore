@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -27,9 +28,11 @@ import androidx.compose.ui.unit.sp
 import carrystore.shared.generated.resources.Res
 import carrystore.shared.generated.resources.add_to_cart
 import carrystore.shared.generated.resources.buy_now
+import carrystore.shared.generated.resources.nunito
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.Counter
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -71,7 +74,8 @@ fun ProductBottomSheet(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
 
                 Text(
@@ -80,7 +84,8 @@ fun ProductBottomSheet(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
             }
             //endregion
@@ -98,7 +103,8 @@ fun ProductBottomSheet(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.ExtraBold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
 
                 Text(
@@ -106,7 +112,8 @@ fun ProductBottomSheet(
                     text = product.description,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f)
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f),
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
             }
             //endregion
@@ -147,7 +154,8 @@ fun ProductBottomSheet(
                         text = stringResource(Res.string.add_to_cart),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onPrimary
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontFamily = FontFamily(Font(Res.font.nunito))
                     )
                 }
 
@@ -166,7 +174,8 @@ fun ProductBottomSheet(
                         text = stringResource(Res.string.buy_now),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontFamily = FontFamily(Font(Res.font.nunito))
                     )
                 }
             }

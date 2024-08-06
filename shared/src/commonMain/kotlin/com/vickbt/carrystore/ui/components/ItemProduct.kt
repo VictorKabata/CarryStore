@@ -54,7 +54,7 @@ fun ItemProduct(
 
             Column(
                 modifier = Modifier.fillMaxWidth().padding(all = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterVertically),
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(

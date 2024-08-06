@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,12 +32,14 @@ import androidx.navigation.NavHostController
 import carrystore.shared.generated.resources.Res
 import carrystore.shared.generated.resources.cart_empty
 import carrystore.shared.generated.resources.checkout
+import carrystore.shared.generated.resources.nunito
 import carrystore.shared.generated.resources.reload
 import carrystore.shared.generated.resources.shop_now
 import carrystore.shared.generated.resources.total
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemCartProduct
 import com.vickbt.carrystore.ui.navigation.NavigationItem
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -116,7 +119,8 @@ fun CartScreen(
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                maxLines = 1
+                                maxLines = 1,
+                                fontFamily = FontFamily(Font(Res.font.nunito))
                             )
 
                             Text(
@@ -124,7 +128,8 @@ fun CartScreen(
                                 fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                maxLines = 1
+                                maxLines = 1,
+                                fontFamily = FontFamily(Font(Res.font.nunito))
                             )
                         }
 
@@ -139,7 +144,8 @@ fun CartScreen(
                                 modifier = Modifier.padding(vertical = 6.dp),
                                 text = stringResource(Res.string.checkout),
                                 fontSize = 16.sp,
-                                fontWeight = FontWeight.SemiBold
+                                fontWeight = FontWeight.SemiBold,
+                                fontFamily = FontFamily(Font(Res.font.nunito))
                             )
                         }
 
