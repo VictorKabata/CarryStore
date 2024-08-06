@@ -1,6 +1,7 @@
 @file:OptIn(
     KoinExperimentalAPI::class,
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class
 )
 
 package com.vickbt.carrystore.ui.screens.products
@@ -44,7 +45,7 @@ import carrystore.shared.generated.resources.reload
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemProduct
-import com.vickbt.carrystore.ui.screens.product_details.ProductBottomSheet
+import com.vickbt.carrystore.ui.screens.details.ProductBottomSheet
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -55,7 +56,6 @@ fun ProductsScreen(
     paddingValues: PaddingValues = PaddingValues(),
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
-
     val productsUiState = viewModel.products.collectAsState().value
 
     val localDensity = LocalDensity.current
@@ -101,7 +101,8 @@ fun ProductsScreen(
                         onIncrement = { itemCount++ }
                     )
                 }
-            }) {
+            }
+        ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 if (productsUiState.isLoading) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -120,7 +121,8 @@ fun ProductsScreen(
                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(
-                            8.dp, Alignment.CenterHorizontally
+                            8.dp,
+                            Alignment.CenterHorizontally
                         )
                     ) {
                         items(productsUiState.products ?: emptyList()) { product ->

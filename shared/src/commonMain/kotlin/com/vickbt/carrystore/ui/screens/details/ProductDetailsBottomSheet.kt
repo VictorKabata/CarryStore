@@ -1,4 +1,4 @@
-package com.vickbt.carrystore.ui.screens.product_details
+package com.vickbt.carrystore.ui.screens.details
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -44,9 +44,8 @@ fun ProductBottomSheet(
     onAddToCartClicked: (Product) -> Unit,
     onBuyNowClicked: (Product) -> Unit,
     onIncrement: () -> Unit,
-    onDecrement: () -> Unit,
+    onDecrement: () -> Unit
 ) {
-
     val columnScrollState = rememberScrollState()
 
     Box(modifier = modifier) {
@@ -60,7 +59,7 @@ fun ProductBottomSheet(
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
+                alignment = Alignment.Center
             )
 
             //region Name & Price
@@ -181,6 +180,5 @@ fun ProductBottomSheet(
             }
             //endregion
         }
-
     }
 }

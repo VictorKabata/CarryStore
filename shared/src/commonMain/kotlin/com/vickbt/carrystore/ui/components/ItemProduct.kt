@@ -34,7 +34,6 @@ fun ItemProduct(
     product: Product,
     onClick: (Product) -> Unit
 ) {
-
     Card(
         modifier = modifier.clickable { onClick(product) },
         shape = cardCornerRadius
@@ -49,7 +48,7 @@ fun ItemProduct(
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
+                alignment = Alignment.Center
             )
 
             Column(
@@ -82,5 +81,4 @@ fun ItemProduct(
             }
         }
     }
-
 }

@@ -6,7 +6,7 @@ import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 
 actual class DiHelper {
-    actual fun initKoin(): KoinApplication = startKoin{
+    actual fun initKoin(): KoinApplication = startKoin {
         modules(commonModule, platformModule())
     }
 }

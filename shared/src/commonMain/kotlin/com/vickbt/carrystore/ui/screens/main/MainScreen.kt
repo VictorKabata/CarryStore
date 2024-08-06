@@ -21,7 +21,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun MainScreen(viewModel: MainScreenViewModel = koinViewModel<MainScreenViewModel>()) {
-
     CarryStoreTheme {
         val mainScreenUiState = viewModel.mainUiState.collectAsState().value
 
@@ -51,7 +50,8 @@ fun MainScreen(viewModel: MainScreenViewModel = koinViewModel<MainScreenViewMode
                         bottomNavItems = topLevelDestinations
                     )
                 }
-            }) { paddingValues ->
+            }
+        ) { paddingValues ->
             Navigation(navHostController = navHostController, paddingValues = paddingValues)
         }
     }

@@ -56,5 +56,4 @@ class CartViewModel(private val cartRepository: CartRepository) : ViewModel() {
             _cartUiState.update { it.copy(errorMessage = e.message) }
         }
     }
-
 }

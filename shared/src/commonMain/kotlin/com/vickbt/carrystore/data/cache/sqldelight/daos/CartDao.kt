@@ -45,5 +45,4 @@ class CartDao(private val databaseDriverFactory: DatabaseDriverFactory) {
     suspend fun deleteAllProducts() = withContext(Dispatchers.IO) {
         dbQuery.deleteAllProducts()
     }
-
 }

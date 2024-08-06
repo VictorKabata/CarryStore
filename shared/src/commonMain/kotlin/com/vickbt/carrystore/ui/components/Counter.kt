@@ -62,9 +62,11 @@ fun Counter(
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.White
             ),
-            onClick = { onDecrement(count) }) {
+            onClick = { onDecrement(count) }
+        ) {
             Icon(
-                imageVector = Icons.Rounded.Remove, contentDescription = null
+                imageVector = Icons.Rounded.Remove,
+                contentDescription = null
             )
         }
 
@@ -93,9 +95,11 @@ fun Counter(
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.White
             ),
-            onClick = { onIncrement(count) }) {
+            onClick = { onIncrement(count) }
+        ) {
             Icon(
-                imageVector = Icons.Rounded.Add, contentDescription = null
+                imageVector = Icons.Rounded.Add,
+                contentDescription = null
             )
         }
     }

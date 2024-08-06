@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.vickbt.carrystore.data.datasources.CartRepository
 import com.vickbt.carrystore.data.datasources.ProductsRepository
 import com.vickbt.carrystore.domain.models.Product
-import com.vickbt.carrystore.utils.ProductDetailsUiState
 import com.vickbt.carrystore.utils.ProductsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,5 +41,4 @@ class ProductsViewModel(
             _products.update { it.copy(errorMessage = e.message) }
         }
     }
-
 }

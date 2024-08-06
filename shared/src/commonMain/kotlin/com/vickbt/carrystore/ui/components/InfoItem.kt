@@ -34,7 +34,6 @@ fun ErrorState(
     actionMessage: String? = null,
     action: () -> Unit = {}
 ) {
-
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
@@ -76,7 +75,5 @@ fun ErrorState(
                 )
             }
         }
-
     }
-
 }

@@ -7,7 +7,6 @@ import com.vickbt.carrystore.data.network.ApiService
 import com.vickbt.carrystore.data.network.NetworkClient
 import com.vickbt.carrystore.ui.screens.cart.CartViewModel
 import com.vickbt.carrystore.ui.screens.main.MainScreenViewModel
-import com.vickbt.carrystore.ui.screens.product_details.ProductDetailsViewModel
 import com.vickbt.carrystore.ui.screens.products.ProductsViewModel
 import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module

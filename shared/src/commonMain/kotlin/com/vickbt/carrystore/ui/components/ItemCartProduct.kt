@@ -38,7 +38,6 @@ fun ItemCartProduct(
     onItemCountChanged: (Int) -> Unit,
     onClickDelete: (Int) -> Unit
 ) {
-
     Card(modifier = modifier, shape = MaterialTheme.shapes.small) {
         Row(
             modifier = Modifier.fillMaxSize().padding(4.dp),
@@ -50,7 +49,7 @@ fun ItemCartProduct(
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
+                alignment = Alignment.Center
             )
 
             Column(
@@ -98,7 +97,6 @@ fun ItemCartProduct(
             IconButton(modifier = Modifier.weight(1f), onClick = { onClickDelete(product.id) }) {
                 Icon(imageVector = Icons.Rounded.Delete, contentDescription = null)
             }
-
         }
     }
 }

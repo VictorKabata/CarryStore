@@ -49,7 +49,6 @@ fun CartScreen(
     paddingValues: PaddingValues = PaddingValues(),
     viewModel: CartViewModel = koinViewModel<CartViewModel>()
 ) {
-
     val cartUiState = viewModel.cartUiState.collectAsState().value
 
     Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
@@ -60,7 +59,7 @@ fun CartScreen(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.Person,
                 errorMessage = cartUiState.errorMessage,
-                actionMessage = stringResource(Res.string.reload),
+                actionMessage = stringResource(Res.string.reload)
             ) {
                 viewModel.getAllProducts()
             }
@@ -79,7 +78,6 @@ fun CartScreen(
                 cartUiState.products.groupBy { it.currencyCode }.maxBy { it.value.size }.key
 
             Column(modifier = Modifier.fillMaxSize()) {
-
                 LazyColumn(
                     modifier = Modifier.weight(.9f),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
@@ -147,13 +145,9 @@ fun CartScreen(
                                 fontFamily = FontFamily(Font(Res.font.nunito))
                             )
                         }
-
                     }
                 }
-
-
             }
         }
     }
-
 }

@@ -13,7 +13,6 @@ fun Navigation(
     navHostController: NavHostController,
     paddingValues: PaddingValues = PaddingValues()
 ) {
-
     NavHost(navController = navHostController, startDestination = NavigationItem.Products.route) {
         composable(route = NavigationItem.Products.route) {
             ProductsScreen(paddingValues = paddingValues)
@@ -23,5 +22,4 @@ fun Navigation(
             CartScreen(navHostController = navHostController, paddingValues = paddingValues)
         }
     }
-
 }
