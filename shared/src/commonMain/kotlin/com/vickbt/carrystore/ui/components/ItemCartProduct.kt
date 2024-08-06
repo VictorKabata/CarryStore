@@ -19,13 +19,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.nunito
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun ItemCartProduct(
@@ -63,7 +67,8 @@ fun ItemCartProduct(
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
 
                 Text(
@@ -73,7 +78,8 @@ fun ItemCartProduct(
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))

@@ -17,10 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.nunito
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun ErrorState(
@@ -48,7 +52,8 @@ fun ErrorState(
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
+            fontFamily = FontFamily(Font(Res.font.nunito))
         )
 
         actionMessage?.let {
@@ -66,7 +71,8 @@ fun ErrorState(
                     text = it,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onPrimary
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
             }
         }

@@ -22,11 +22,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.nunito
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun Counter(
@@ -70,7 +74,8 @@ fun Counter(
             color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,
             fontWeight = FontWeight.Bold,
-            fontSize = countTextSize
+            fontSize = countTextSize,
+            fontFamily = FontFamily(Font(Res.font.nunito))
         )
 
         IconButton(
