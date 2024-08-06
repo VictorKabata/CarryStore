@@ -24,7 +24,7 @@ private val DarkColorPalette = darkColorScheme(
 
 private val LightColorPalette = lightColorScheme(
     primary = PrimaryColor,
-    onPrimary = Color(0xFF000000),
+    onPrimary = Color(0xFFFFFFFF),
     secondary = PrimaryColor,
     onSecondary = TextSecondary,
     surface = Surface,

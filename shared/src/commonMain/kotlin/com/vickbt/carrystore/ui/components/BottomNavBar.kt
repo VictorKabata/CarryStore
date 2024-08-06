@@ -45,7 +45,7 @@ fun BottomNavBar(
                         if (item == NavigationItem.Cart && cartItemCount > 0) {
                             Badge(
                                 containerColor = MaterialTheme.colorScheme.primary.copy(alpha = .6f),
-                                contentColor = MaterialTheme.colorScheme.onPrimary
+                                contentColor = MaterialTheme.colorScheme.onSurface
                             ) {
                                 Text(
                                     text = cartItemCount.toString(),
