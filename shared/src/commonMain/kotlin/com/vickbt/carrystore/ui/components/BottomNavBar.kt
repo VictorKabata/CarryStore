@@ -72,7 +72,7 @@ fun BottomNavBar(
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
                     unselectedIconColor = Gray,
-                    indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = .20f)
+                    indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = .30f)
                 ),
                 selected = isSelected,
                 onClick = {
