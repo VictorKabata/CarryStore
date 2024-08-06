@@ -15,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.vickbt.carrystore.ui.navigation.NavigationItem
 import com.vickbt.carrystore.ui.theme.Gray
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BottomNavBar(
@@ -47,11 +48,11 @@ fun BottomNavBar(
                     }) {
                         Icon(
                             imageVector = item.icon,
-                            contentDescription = item.title
+                            contentDescription = stringResource(item.title)
                         )
                     }
                 },
-                label = { Text(text = item.title) },
+                label = { Text(text = stringResource(item.title)) },
                 alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
