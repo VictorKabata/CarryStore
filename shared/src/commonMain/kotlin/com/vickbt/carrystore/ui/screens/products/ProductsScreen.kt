@@ -117,13 +117,15 @@ fun ProductsScreen(
                     LazyVerticalGrid(
                         modifier = Modifier.fillMaxSize().align(Alignment.Center),
                         columns = GridCells.Fixed(2),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(
                             8.dp, Alignment.CenterHorizontally
                         )
                     ) {
                         items(productsUiState.products ?: emptyList()) { product ->
-                            ItemProduct(modifier = Modifier,
+                            ItemProduct(
+                                modifier = Modifier,
                                 product = product,
                                 onClick = {
                                     scope.launch {

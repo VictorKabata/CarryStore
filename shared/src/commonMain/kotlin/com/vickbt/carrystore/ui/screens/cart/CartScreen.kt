@@ -22,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -83,11 +82,11 @@ fun CartScreen(
 
                 LazyColumn(
                     modifier = Modifier.weight(.9f),
-                    contentPadding = PaddingValues(horizontal = 12.dp)
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                 ) {
                     items(items = cartUiState.products) { product ->
                         ItemCartProduct(
-                            modifier = Modifier.padding(vertical = 6.dp),
+                            modifier = Modifier.padding(vertical = 4.dp),
                             product = product,
                             onItemCountChanged = { itemCount ->
                                 viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))
