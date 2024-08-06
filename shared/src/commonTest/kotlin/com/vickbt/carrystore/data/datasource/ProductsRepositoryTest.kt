@@ -1,4 +1,4 @@
-package com.vickbt.carrystore.data.datastore
+package com.vickbt.carrystore.data.datasource
 
 import app.cash.turbine.test
 import assertk.assertThat
