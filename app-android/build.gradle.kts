@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.compose.activity)
     implementation(libs.appCompat)
 
+    implementation(libs.koin.android)
+
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)

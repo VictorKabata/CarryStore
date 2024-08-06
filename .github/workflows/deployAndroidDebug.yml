@@ -1,4 +1,4 @@
-name: Deploy Android Debug Test
+name: 🚀 Deploy Android Debug Test
 on:
   push:
   workflow_dispatch:
@@ -63,4 +63,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
           groups: testers
-          file: appAndroid/build/outputs/apk/debug/appAndroid-debug.apk
+          file: app-android/build/outputs/apk/debug/app-android-debug.apk
