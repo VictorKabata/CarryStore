@@ -39,11 +39,14 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.reload
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemProduct
 import com.vickbt.carrystore.ui.screens.product_details.ProductBottomSheet
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -107,7 +110,7 @@ fun ProductsScreen(
                         modifier = Modifier.align(Alignment.Center),
                         errorIcon = Icons.Rounded.Error,
                         errorMessage = productsUiState.errorMessage,
-                        actionMessage = "Reload",
+                        actionMessage = stringResource(Res.string.reload),
                         action = { viewModel.fetchProducts() }
                     )
                 } else {
@@ -116,8 +119,7 @@ fun ProductsScreen(
                         columns = GridCells.Fixed(2),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(
-                            8.dp,
-                            Alignment.CenterHorizontally
+                            8.dp, Alignment.CenterHorizontally
                         )
                     ) {
                         items(productsUiState.products ?: emptyList()) { product ->

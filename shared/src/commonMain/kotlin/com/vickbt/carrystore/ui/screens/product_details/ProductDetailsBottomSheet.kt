@@ -24,9 +24,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.add_to_cart
+import carrystore.shared.generated.resources.buy_now
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.Counter
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ProductBottomSheet(
@@ -140,7 +144,7 @@ fun ProductBottomSheet(
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        text = "Add to Cart",
+                        text = stringResource(Res.string.add_to_cart),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onPrimary
@@ -159,7 +163,7 @@ fun ProductBottomSheet(
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        text = "Buy Now",
+                        text = stringResource(Res.string.buy_now),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurface

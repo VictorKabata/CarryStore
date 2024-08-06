@@ -28,9 +28,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.cart_empty
+import carrystore.shared.generated.resources.checkout
+import carrystore.shared.generated.resources.reload
+import carrystore.shared.generated.resources.shop_now
+import carrystore.shared.generated.resources.total
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemCartProduct
 import com.vickbt.carrystore.ui.navigation.NavigationItem
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -51,14 +58,16 @@ fun CartScreen(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.Person,
                 errorMessage = cartUiState.errorMessage,
-                actionMessage = "Reload"
-            )
+                actionMessage = stringResource(Res.string.reload),
+            ) {
+                viewModel.getAllProducts()
+            }
         } else if (cartUiState.products.isNullOrEmpty()) {
             ErrorState(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.ShoppingCart,
-                errorMessage = "Cart is empty",
-                actionMessage = "Shop Now"
+                errorMessage = stringResource(Res.string.cart_empty),
+                actionMessage = stringResource(Res.string.shop_now)
             ) {
                 navHostController.navigate(NavigationItem.Products.route)
             }
@@ -103,7 +112,7 @@ fun CartScreen(
                     ) {
                         Column(modifier = Modifier.weight(5f)) {
                             Text(
-                                text = "Total: ",
+                                text = stringResource(Res.string.total),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.onSurface,
@@ -128,8 +137,8 @@ fun CartScreen(
                         ) {
                             Text(
                                 modifier = Modifier.padding(vertical = 6.dp),
-                                text = "Checkout",
-                                fontSize = 20.sp,
+                                text = stringResource(Res.string.checkout),
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
                         }
