@@ -14,9 +14,7 @@ koinComposeViewModel = "1.2.0-Beta5"
 napier = "2.7.1"
 coroutines = "1.8.1"
 navigation = "2.7.0-alpha07"
-
 coil = "3.0.0-alpha06"
-datastore = "1.1.1"
 kotlinxSerializationJson = "1.7.1"
 kotlinxDateTime = "0.6.0"
 ktor = "2.3.12"
@@ -25,6 +23,11 @@ sqlDelight = "2.0.2"
 #Android Versions
 appCompat = "1.7.0"
 composeActivity = "1.9.1"
+googleServices = "4.4.2"
+firebaseBOM = "33.1.2"
+firebaseAppDistribution = "5.0.0"
+firebaseCrashlytics = "3.0.2"
+firebasePerformance = "1.4.2"
 
 [plugins]
 ktLint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLint" }
@@ -39,6 +42,10 @@ compose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinX-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+googleServices-plugin = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-appDistribution-plugin = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution" }
+firebase-performance-plugin = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerformance" }
 
 [libraries]
 #Kotlin Multiplatform Lib Dependencies
@@ -74,6 +81,11 @@ sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
+firebase-BOM = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBOM" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-performance = { module = "com.google.firebase:firebase-perf" }
+
 #Android Lib Dependencies
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
@@ -84,4 +96,5 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
 coil = ["coil-compose", "coil-compose-core", "coil-ktor", "coil-multiplatform"]
+firebase=["firebase-analytics", "firebase-crashlytics", "firebase-performance"]
 

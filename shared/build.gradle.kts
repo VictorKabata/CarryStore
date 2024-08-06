@@ -78,7 +78,10 @@ kotlin {
 
         sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
+
             implementation(libs.sqlDelight.android)
+
+            implementation(libs.koin.android)
         }
 
         sourceSets["iosMain"].dependencies {
