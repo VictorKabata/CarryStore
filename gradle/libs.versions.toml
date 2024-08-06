@@ -20,6 +20,8 @@ kotlinxDateTime = "0.6.0"
 ktor = "2.3.12"
 sqlDelight = "2.0.2"
 
+assertK="0.28.1"
+
 #Android Versions
 appCompat = "1.7.0"
 composeActivity = "1.9.1"
@@ -92,6 +94,8 @@ appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat"
 
 #Test Dependencies
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+assertK={module="com.willowtreeapps.assertk:assertk", version.ref="assertK"}
+sqlDelight-sqlite-driver={module="app.cash.sqldelight:sqlite-driver", version.ref="sqlDelight"}
 
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]

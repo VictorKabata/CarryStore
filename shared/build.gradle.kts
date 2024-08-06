@@ -74,6 +74,8 @@ kotlin {
 
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.assertK)
         }
 
         sourceSets["androidMain"].dependencies {
