@@ -1,6 +1,7 @@
 @file:OptIn(
     KoinExperimentalAPI::class,
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class
 )
 
 package com.vickbt.carrystore.ui.screens.products
@@ -15,8 +16,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,11 +40,14 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.reload
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemProduct
-import com.vickbt.carrystore.ui.screens.product_details.ProductBottomSheet
+import com.vickbt.carrystore.ui.screens.details.ProductBottomSheet
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -51,7 +56,6 @@ fun ProductsScreen(
     paddingValues: PaddingValues = PaddingValues(),
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
-
     val productsUiState = viewModel.products.collectAsState().value
 
     val localDensity = LocalDensity.current
@@ -72,8 +76,8 @@ fun ProductsScreen(
     Scaffold(modifier = Modifier.padding(paddingValues)) {
         BottomSheetScaffold(
             scaffoldState = bottomSheetScaffoldState,
-            sheetShape = MaterialTheme.shapes.small,
-            sheetContainerColor = MaterialTheme.colorScheme.surface,
+            sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+            sheetContainerColor = MaterialTheme.colorScheme.surfaceContainer,
             sheetContent = {
                 selectedProduct?.let { product ->
                     ProductBottomSheet(
@@ -93,31 +97,28 @@ fun ProductsScreen(
                         },
                         onBuyNowClicked = { scope.launch { sheetState.hide() } },
                         itemCount = itemCount,
-                        onDecrement = {
-                            if (itemCount > 0) {
-                                itemCount--
-                            }
-                        },
-                        onIncrement = {
-                            itemCount++
-                        }
+                        onDecrement = { itemCount-- },
+                        onIncrement = { itemCount++ }
                     )
                 }
-            }) {
+            }
+        ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 if (productsUiState.isLoading) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
                     ErrorState(
                         modifier = Modifier.align(Alignment.Center),
-                        errorIcon = Icons.Rounded.Person,
+                        errorIcon = Icons.Rounded.Error,
                         errorMessage = productsUiState.errorMessage,
-                        actionMessage = "Reload"
+                        actionMessage = stringResource(Res.string.reload),
+                        action = { viewModel.fetchProducts() }
                     )
                 } else {
                     LazyVerticalGrid(
                         modifier = Modifier.fillMaxSize().align(Alignment.Center),
                         columns = GridCells.Fixed(2),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         horizontalArrangement = Arrangement.spacedBy(
                             8.dp,
@@ -125,16 +126,20 @@ fun ProductsScreen(
                         )
                     ) {
                         items(productsUiState.products ?: emptyList()) { product ->
-                            ItemProduct(modifier = Modifier, product = product) {
-                                scope.launch {
-                                    if (!sheetState.isVisible) {
-                                        selectedProduct = product
-                                        sheetState.expand()
-                                    } else {
-                                        sheetState.hide()
+                            ItemProduct(
+                                modifier = Modifier,
+                                product = product,
+                                onClick = {
+                                    scope.launch {
+                                        if (!sheetState.isVisible) {
+                                            selectedProduct = product
+                                            sheetState.expand()
+                                        } else {
+                                            sheetState.hide()
+                                        }
                                     }
                                 }
-                            }
+                            )
                         }
                     }
                 }

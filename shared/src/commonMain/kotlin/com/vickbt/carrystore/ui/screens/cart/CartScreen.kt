@@ -22,18 +22,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.cart_empty
+import carrystore.shared.generated.resources.checkout
+import carrystore.shared.generated.resources.nunito
+import carrystore.shared.generated.resources.reload
+import carrystore.shared.generated.resources.shop_now
+import carrystore.shared.generated.resources.total
 import com.vickbt.carrystore.ui.components.ErrorState
 import com.vickbt.carrystore.ui.components.ItemCartProduct
 import com.vickbt.carrystore.ui.navigation.NavigationItem
+import org.jetbrains.compose.resources.Font
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -43,7 +49,6 @@ fun CartScreen(
     paddingValues: PaddingValues = PaddingValues(),
     viewModel: CartViewModel = koinViewModel<CartViewModel>()
 ) {
-
     val cartUiState = viewModel.cartUiState.collectAsState().value
 
     Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
@@ -54,30 +59,29 @@ fun CartScreen(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.Person,
                 errorMessage = cartUiState.errorMessage,
-                actionMessage = "Reload"
-            )
+                actionMessage = stringResource(Res.string.reload)
+            ) {
+                viewModel.getAllProducts()
+            }
         } else if (cartUiState.products.isNullOrEmpty()) {
             ErrorState(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.ShoppingCart,
-                errorMessage = "Cart is empty",
-                actionMessage = "Shop Now"
+                errorMessage = stringResource(Res.string.cart_empty),
+                actionMessage = stringResource(Res.string.shop_now)
             ) {
                 navHostController.navigate(NavigationItem.Products.route)
             }
         } else {
-//            val cartSubTotal by remember { mutableStateOf(cartUiState.products.sumOf { it.price *(it.cartQuantity?:1)}) }
             val subTotal = cartUiState.products.sumOf { it.price * (it.cartQuantity ?: 1) }
-            val currencyCode by remember {
-                mutableStateOf(cartUiState.products.groupBy { it.currencyCode }
-                    .maxBy { it.value.size }.key)
-            }
+            val currencyCode =
+                cartUiState.products.groupBy { it.currencyCode }.maxBy { it.value.size }.key
 
-            Box(
-                modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
-            ) {
-
-                LazyColumn(modifier = Modifier.align(Alignment.TopCenter)) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                LazyColumn(
+                    modifier = Modifier.weight(.9f),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                ) {
                     items(items = cartUiState.products) { product ->
                         ItemCartProduct(
                             modifier = Modifier.padding(vertical = 4.dp),
@@ -93,7 +97,7 @@ fun CartScreen(
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
+                    modifier = Modifier.fillMaxWidth().weight(.1f)
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
                     HorizontalDivider(
@@ -108,11 +112,12 @@ fun CartScreen(
                     ) {
                         Column(modifier = Modifier.weight(5f)) {
                             Text(
-                                text = "Total: ",
+                                text = stringResource(Res.string.total),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                maxLines = 1
+                                maxLines = 1,
+                                fontFamily = FontFamily(Font(Res.font.nunito))
                             )
 
                             Text(
@@ -120,7 +125,8 @@ fun CartScreen(
                                 fontSize = 22.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                maxLines = 1
+                                maxLines = 1,
+                                fontFamily = FontFamily(Font(Res.font.nunito))
                             )
                         }
 
@@ -129,21 +135,19 @@ fun CartScreen(
                             onClick = {
                                 viewModel.deleteAllCartProducts()
                             },
-                            shape = MaterialTheme.shapes.medium
+                            shape = MaterialTheme.shapes.extraLarge
                         ) {
                             Text(
-                                text = "Checkout",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.SemiBold
+                                modifier = Modifier.padding(vertical = 6.dp),
+                                text = stringResource(Res.string.checkout),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                fontFamily = FontFamily(Font(Res.font.nunito))
                             )
                         }
-
                     }
                 }
-
-
             }
         }
     }
-
 }

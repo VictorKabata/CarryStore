@@ -28,5 +28,4 @@ class MainScreenViewModel(val cartRepository: CartRepository) : ViewModel() {
                 _mainUiState.value.copy(errorMessage = e.message)
         }
     }
-
 }

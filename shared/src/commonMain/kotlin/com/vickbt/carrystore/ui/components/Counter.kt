@@ -6,6 +6,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -21,11 +22,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.nunito
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun Counter(
@@ -53,23 +58,26 @@ fun Counter(
             enabled = count > 1,
             colors = IconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
+                contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
-                disabledContentColor = Color.Black
+                disabledContentColor = Color.White
             ),
-            onClick = { onDecrement(count) }) {
+            onClick = { onDecrement(count) }
+        ) {
             Icon(
-                imageVector = Icons.Rounded.Remove, contentDescription = null
+                imageVector = Icons.Rounded.Remove,
+                contentDescription = null
             )
         }
 
         Text(
-            modifier = Modifier,
+            modifier = Modifier.padding(horizontal = 8.dp),
             text = count.toString(),
             color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,
             fontWeight = FontWeight.Bold,
-            fontSize = countTextSize
+            fontSize = countTextSize,
+            fontFamily = FontFamily(Font(Res.font.nunito))
         )
 
         IconButton(
@@ -83,13 +91,15 @@ fun Counter(
             enabled = count < maxCount,
             colors = IconButtonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
+                contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
-                disabledContentColor = Color.Black
+                disabledContentColor = Color.White
             ),
-            onClick = { onIncrement(count) }) {
+            onClick = { onIncrement(count) }
+        ) {
             Icon(
-                imageVector = Icons.Rounded.Add, contentDescription = null
+                imageVector = Icons.Rounded.Add,
+                contentDescription = null
             )
         }
     }

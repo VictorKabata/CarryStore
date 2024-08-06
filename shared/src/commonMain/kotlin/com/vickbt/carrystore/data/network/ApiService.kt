@@ -8,7 +8,6 @@ import com.vickbt.carrystore.utils.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import kotlinx.coroutines.flow.Flow
 
 class ApiService(private val httpClient: HttpClient) {
 
@@ -16,5 +15,4 @@ class ApiService(private val httpClient: HttpClient) {
         val response = httpClient.get(urlString = "productBundles").body<List<ProductDto>>()
         return@safeApiCall response.map { it.toDomain() }
     }
-
 }

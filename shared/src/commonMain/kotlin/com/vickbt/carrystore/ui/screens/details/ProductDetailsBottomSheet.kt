@@ -1,6 +1,4 @@
-@file:OptIn(KoinExperimentalAPI::class)
-
-package com.vickbt.carrystore.ui.screens.product_details
+package com.vickbt.carrystore.ui.screens.details
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -22,14 +20,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.add_to_cart
+import carrystore.shared.generated.resources.buy_now
+import carrystore.shared.generated.resources.nunito
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.Counter
-import org.koin.core.annotation.KoinExperimentalAPI
+import org.jetbrains.compose.resources.Font
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ProductBottomSheet(
@@ -40,22 +44,22 @@ fun ProductBottomSheet(
     onAddToCartClicked: (Product) -> Unit,
     onBuyNowClicked: (Product) -> Unit,
     onIncrement: () -> Unit,
-    onDecrement: () -> Unit,
+    onDecrement: () -> Unit
 ) {
-
     val columnScrollState = rememberScrollState()
 
     Box(modifier = modifier) {
         Column(
             modifier = Modifier.verticalScroll(columnScrollState),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
         ) {
             AsyncImage(
                 modifier = Modifier.fillMaxSize(.40f),
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
+                alignment = Alignment.Center
             )
 
             //region Name & Price
@@ -69,7 +73,8 @@ fun ProductBottomSheet(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
 
                 Text(
@@ -78,34 +83,39 @@ fun ProductBottomSheet(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
             }
             //endregion
 
             //region Description title & Description
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start
+            ) {
                 Text(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    modifier = Modifier,
                     text = "Description",
-                    fontSize = 16.sp,
+                    fontSize = 18.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    fontWeight = FontWeight.ExtraBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
 
                 Text(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier,
                     text = product.description,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f)
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .85f),
+                    fontFamily = FontFamily(Font(Res.font.nunito))
                 )
             }
             //endregion
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             Counter(
                 modifier = Modifier.fillMaxWidth(.80f),
@@ -125,45 +135,50 @@ fun ProductBottomSheet(
 
             //region Add to Cart & Buy Now
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
             ) {
                 Button(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                     onClick = { onAddToCartClicked(product) },
-                    shape = MaterialTheme.shapes.medium
+                    shape = MaterialTheme.shapes.extraLarge,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        text = "Add to Cart",
+                        text = stringResource(Res.string.add_to_cart),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontFamily = FontFamily(Font(Res.font.nunito))
                     )
                 }
 
                 Button(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                     onClick = { onBuyNowClicked(product) },
-                    shape = MaterialTheme.shapes.medium,
+                    shape = MaterialTheme.shapes.extraLarge,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surface,
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
                         contentColor = MaterialTheme.colorScheme.onSurface
                     ),
                     border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        text = "Buy Now",
+                        text = stringResource(Res.string.buy_now),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontFamily = FontFamily(Font(Res.font.nunito))
                     )
                 }
             }
             //endregion
         }
-
     }
 }

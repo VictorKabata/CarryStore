@@ -7,16 +7,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
-import com.vickbt.carrystore.di.commonModule
-import com.vickbt.carrystore.di.platformModule
 import com.vickbt.carrystore.utils.getAsyncImageLoader
-import org.koin.compose.KoinApplication
 
 private val DarkColorPalette = darkColorScheme(
     primary = DarkPrimaryColor,
+    onPrimary = Color(0xFFFFFFFF),
     secondary = DarkPrimaryColor,
+    onSecondary = DarkTextSecondary,
     surface = DarkSurface,
     onSurface = DarkTextPrimary,
     background = DarkSurface
@@ -24,7 +24,9 @@ private val DarkColorPalette = darkColorScheme(
 
 private val LightColorPalette = lightColorScheme(
     primary = PrimaryColor,
+    onPrimary = Color(0xFFFFFFFF),
     secondary = PrimaryColor,
+    onSecondary = TextSecondary,
     surface = Surface,
     onSurface = TextPrimary,
     background = Surface

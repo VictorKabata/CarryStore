@@ -8,5 +8,4 @@ import kotlinx.coroutines.flow.flowOf
 class ProductsRepository(private val apiService: ApiService) {
 
     suspend fun fetchProducts(): Flow<Result<List<Product>>> = flowOf(apiService.fetchProducts())
-
 }

@@ -12,7 +12,7 @@ data class ProductsUiState(
 
 data class ProductDetailsUiState(
     val errorMessage: String? = null,
-    val product: Product? = null,
+    val product: Product? = null
 )
 
 data class CartUiState(

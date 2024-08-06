@@ -1,4 +1,4 @@
-package com.vickbt.carrystore.ui.screens.product_details
+package com.vickbt.carrystore.ui.screens.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,5 +24,4 @@ class ProductDetailsViewModel(private val cartRepository: CartRepository) : View
             _productDetailsUiState.update { it.copy(errorMessage = e.message) }
         }
     }
-
 }
