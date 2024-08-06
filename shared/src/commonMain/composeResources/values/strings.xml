@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Carry Store</string>
+
+    <string name="products">Products</string>
+    <string name="cart">Cart</string>
+
+    <string name="reload">Reload</string>
+
+    <string name="cart_empty">Cart is empty</string>
+    <string name="shop_now">Shop Now</string>
+
+    <string name="description">Description</string>
+
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="buy_now">Buy Now</string>
+
+    <string name="checkout">Checkout</string>
+
+    <string name="total">Total: </string>
+</resources>

@@ -15,13 +15,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import carrystore.shared.generated.resources.Res
+import carrystore.shared.generated.resources.nunito
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun ItemProduct(
@@ -30,14 +34,13 @@ fun ItemProduct(
     product: Product,
     onClick: (Product) -> Unit
 ) {
-
     Card(
         modifier = modifier.clickable { onClick(product) },
         shape = cardCornerRadius
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.Start,
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             AsyncImage(
@@ -45,28 +48,37 @@ fun ItemProduct(
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
+                alignment = Alignment.Center
             )
 
-            Text(
-                modifier = Modifier.padding(horizontal = 4.dp),
-                text = product.name,
-                fontSize = 16.sp,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Medium
-            )
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(all = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    text = product.name,
+                    fontSize = 16.sp,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
+                )
 
-            Text(
-                modifier = Modifier.padding(horizontal = 4.dp),
-                text = "${product.price} ${product.currencyCode}",
-                fontSize = 18.sp,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold
-            )
+                Text(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    text = "${product.currencyCode} ${product.price}",
+                    fontSize = 18.sp,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = FontFamily(Font(Res.font.nunito))
+                )
+            }
         }
     }
-
 }

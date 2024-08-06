@@ -9,7 +9,13 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
 
     alias(libs.plugins.detekt)
-    // alias(libs.plugins.ktLint)
+    alias(libs.plugins.ktLint)
+
+    alias(libs.plugins.googleServices.plugin) apply false
+
+    alias(libs.plugins.firebase.crashlytics.plugin) apply false
+    alias(libs.plugins.firebase.appDistribution.plugin) apply false
+    alias(libs.plugins.firebase.performance.plugin) apply false
 }
 
 subprojects {
@@ -19,7 +25,7 @@ subprojects {
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
 
-    /**apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         debug.set(true)
         verbose.set(true)
@@ -30,5 +36,5 @@ subprojects {
             enableExperimentalRules.set(true)
             exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
         }
-    }*/
+    }
 }

@@ -1,8 +1,9 @@
 package com.vickbt.carrystore.di
 
+import com.vickbt.carrystore.utils.DatabaseDriverFactory
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import org.koin.core.module.Module
 
 actual fun platformModule() = module {
-
+    singleOf(::DatabaseDriverFactory)
 }

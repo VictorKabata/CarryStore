@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822323998770",
+    "project_id": "carrystore",
+    "storage_bucket": "carrystore.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822323998770:android:8e18c02457ca8501b3cc2b",
+        "android_client_info": {
+          "package_name": "com.vickbt.carrystore.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxGr7gDFgfU6wFLQ4rZw8siRNKyEMJ5t4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -8,14 +7,14 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinX.serialization)
-    // alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.sqlDelight)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
-    androidTarget{
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -35,21 +34,22 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
-        ios.deploymentTarget = "16.0"
+        ios.deploymentTarget = "14.1"
         podfile = project.file("../app-ios/Podfile")
         framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
         }
     }
 
     sourceSets {
         sourceSets["commonMain"].dependencies {
             // Jetpack Compose - UI
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material3)
-            api(compose.components.resources)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+            implementation(compose.materialIconsExtended)
 
             implementation(libs.coroutines)
 
@@ -76,12 +76,13 @@ kotlin {
             implementation(libs.kotlin.test)
         }
 
-        sourceSets["androidMain"].dependencies{
+        sourceSets["androidMain"].dependencies {
             implementation(libs.ktor.android)
+
             implementation(libs.sqlDelight.android)
         }
 
-        sourceSets["iosMain"].dependencies{
+        sourceSets["iosMain"].dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)
         }
@@ -100,11 +101,11 @@ android {
     }
 }
 
-/*sqldelight {
+sqldelight {
     databases {
         create("AppDatabase") {
             packageName.set("com.vickbt.shared.data.cache.sqldelight")
             srcDirs.setFrom("src/commonMain/kotlin")
         }
     }
-}*/
+}
