@@ -76,6 +76,7 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
             implementation(libs.assertK)
+            implementation(libs.sqlDelight.sqliteDriver)
         }
 
         sourceSets["androidMain"].dependencies {

@@ -95,7 +95,7 @@ appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat"
 #Test Dependencies
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 assertK={module="com.willowtreeapps.assertk:assertk", version.ref="assertK"}
-sqlDelight-sqlite-driver={module="app.cash.sqldelight:sqlite-driver", version.ref="sqlDelight"}
+sqlDelight-sqliteDriver={module="app.cash.sqldelight:sqlite-driver", version.ref="sqlDelight"}
 
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
