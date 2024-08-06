@@ -29,7 +29,7 @@ fun AppBar(title: String) {
                 modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                 text = title,
                 color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleLarge,
                 fontSize = 28.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
