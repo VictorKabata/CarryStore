@@ -1,8 +1,8 @@
-package com.vickbt.carrystore.data.network
+package com.vickbt.carrystore.data.mappers
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.vickbt.carrystore.data.mappers.toDomain
+import assertk.assertions.isNull
 import com.vickbt.carrystore.data.network.models.ProductDto
 import kotlin.random.Random
 import kotlin.test.Test
@@ -27,6 +27,8 @@ class DtoToDomainTest {
 
         assertThat(product.id).isEqualTo(productDto.id)
         assertThat(product.name).isEqualTo(productDto.name)
+        assertThat(product.cartQuantity).isNull()
+        assertThat(product.createdAt).isNull()
     }
 
 }
