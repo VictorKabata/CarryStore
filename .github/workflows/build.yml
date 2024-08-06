@@ -27,7 +27,7 @@ jobs:
         run: ./gradlew build --stacktrace
 
       - name: Execute unit tests
-        run: ./gradlew :daraja:check --stacktrace
+        run: ./gradlew :shared:check --stacktrace
 
       - name: Upload test report
         uses: actions/upload-artifact@v3
