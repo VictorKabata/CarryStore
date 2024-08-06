@@ -46,8 +46,7 @@ class CartDaoTest {
 
     @Test
     fun `getAllProducts returns all products`() = runTest {
-        val products = listOf(ProductHelper.product, ProductHelper.product, ProductHelper.product)
-
+        val products = List(5) { ProductHelper.product }
         products.forEach { cartDao.saveProduct(it) }
 
         // Then
@@ -58,7 +57,7 @@ class CartDaoTest {
 
     @Test
     fun `getProduct returns correct product`() = runTest {
-        val products = listOf(ProductHelper.product, ProductHelper.product, ProductHelper.product)
+        val products = List(5) { ProductHelper.product }
         products.forEach { cartDao.saveProduct(it) }
 
         val response = products.map { product ->
@@ -90,7 +89,7 @@ class CartDaoTest {
 
     @Test
     fun `deleteAllProducts deletes all products`() = runTest {
-        val products = listOf(ProductHelper.product, ProductHelper.product, ProductHelper.product)
+        val products = List(5) { ProductHelper.product }
         products.forEach { cartDao.saveProduct(it) }
 
         products.forEachIndexed { index, product ->

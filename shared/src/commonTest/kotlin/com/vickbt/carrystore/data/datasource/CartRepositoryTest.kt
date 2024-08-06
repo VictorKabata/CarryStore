@@ -102,7 +102,5 @@ class CartRepositoryTest {
         cartRepository.getAllProducts().test {
             assertThat(awaitItem()).isNullOrEmpty()
         }
-
     }
-
 }
