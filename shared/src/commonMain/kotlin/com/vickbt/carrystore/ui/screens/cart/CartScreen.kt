@@ -79,7 +79,7 @@ fun CartScreen(
 
             Column(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
-                    modifier = Modifier.weight(.9f),
+                    modifier = Modifier.weight(8.5f),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                 ) {
                     items(items = cartUiState.products) { product ->
@@ -97,7 +97,7 @@ fun CartScreen(
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth().weight(.1f)
+                    modifier = Modifier.fillMaxWidth().weight(1.5f)
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
                     HorizontalDivider(

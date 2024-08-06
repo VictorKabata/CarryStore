@@ -15,10 +15,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
           java-version: '17'
+          cache: 'gradle'
+          cache-dependency-path: |
+            sub-project/*.gradle*
+            sub-project/**/gradle-wrapper.properties
 
       - name: Make gradle executable
         run: chmod +x ./gradlew
