@@ -29,5 +29,4 @@ class EntityToDomainTest {
         assertThat(product.id).isEqualTo(productEntity.id.toInt())
         assertThat(product.name).isEqualTo(productEntity.name)
     }
-
 }

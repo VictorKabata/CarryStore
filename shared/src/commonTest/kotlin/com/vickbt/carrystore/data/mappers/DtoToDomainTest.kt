@@ -30,5 +30,4 @@ class DtoToDomainTest {
         assertThat(product.cartQuantity).isNull()
         assertThat(product.createdAt).isNull()
     }
-
 }

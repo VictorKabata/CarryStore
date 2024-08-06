@@ -47,5 +47,4 @@ object ProductHelper {
             cartQuantity = Random.nextLong(),
             createdAt = Random.nextInt().toString()
         )
-
 }

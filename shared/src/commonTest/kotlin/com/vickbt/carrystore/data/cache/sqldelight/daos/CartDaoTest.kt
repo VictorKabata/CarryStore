@@ -37,7 +37,7 @@ class CartDaoTest {
 
         cartDao.saveProduct(product)
 
-        //Then
+        // Then
         val savedProduct = cartDao.getProduct(product.id).first()
 
         assertThat(savedProduct?.id).isEqualTo(product.id.toLong())
@@ -50,7 +50,7 @@ class CartDaoTest {
 
         products.forEach { cartDao.saveProduct(it) }
 
-        //Then
+        // Then
         cartDao.getAllProducts().test {
             assertThat(products.size).isEqualTo(awaitItem().size)
         }
@@ -105,5 +105,4 @@ class CartDaoTest {
             assertThat(awaitItem()).isNullOrEmpty()
         }
     }
-
 }
