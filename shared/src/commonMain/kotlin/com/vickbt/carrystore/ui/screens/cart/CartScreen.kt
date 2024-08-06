@@ -76,10 +76,10 @@ fun CartScreen(
             val currencyCode =
                 cartUiState.products.groupBy { it.currencyCode }.maxBy { it.value.size }.key
 
-            Box(modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxSize()) {
 
                 LazyColumn(
-                    modifier = Modifier.align(Alignment.TopCenter),
+                    modifier = Modifier.weight(.9f),
                     contentPadding = PaddingValues(horizontal = 12.dp)
                 ) {
                     items(items = cartUiState.products) { product ->
@@ -97,7 +97,7 @@ fun CartScreen(
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
+                    modifier = Modifier.fillMaxWidth().weight(.1f)
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
                     HorizontalDivider(
