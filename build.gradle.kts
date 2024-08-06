@@ -10,6 +10,12 @@ plugins {
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktLint)
+
+    alias(libs.plugins.googleServices.plugin) apply false
+
+    alias(libs.plugins.firebase.crashlytics.plugin) apply false
+    alias(libs.plugins.firebase.appDistribution.plugin) apply false
+    alias(libs.plugins.firebase.performance.plugin) apply false
 }
 
 subprojects {
