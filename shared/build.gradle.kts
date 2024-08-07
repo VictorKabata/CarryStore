@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -80,6 +83,7 @@ kotlin {
             implementation(libs.assertK)
             implementation(libs.sqlDelight.sqliteDriver)
             implementation(libs.turbine)
+            implementation(compose.uiTest)
         }
 
         sourceSets["androidMain"].dependencies {
