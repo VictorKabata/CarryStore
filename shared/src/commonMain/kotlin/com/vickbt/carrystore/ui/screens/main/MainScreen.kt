@@ -2,7 +2,9 @@
 
 package com.vickbt.carrystore.ui.screens.main
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -37,7 +39,7 @@ fun MainScreen(viewModel: MainScreenViewModel = koinViewModel<MainScreenViewMode
         val isTopLevelDestination = currentDestination in topLevelDestinations.map { it.route }
 
         Scaffold(
-            modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
+            modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing),
             topBar = {
                 if (isTopLevelDestination) {
                     AppBar(
@@ -56,7 +58,7 @@ fun MainScreen(viewModel: MainScreenViewModel = koinViewModel<MainScreenViewMode
                 }
             }
         ) { paddingValues ->
-            Surface(modifier = Modifier.padding(paddingValues)) {
+            Box(modifier = Modifier.padding(paddingValues)) {
                 Navigation(navHostController = navHostController)
             }
         }

@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -52,7 +53,7 @@ fun CartScreen(
 ) {
     val cartUiState = viewModel.cartUiState.collectAsState().value
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Scaffold(modifier = Modifier.fillMaxSize()) {
         if (cartUiState.isLoading) {
             CircularProgressIndicator()
         } else if (!cartUiState.errorMessage.isNullOrEmpty()) {
@@ -80,7 +81,7 @@ fun CartScreen(
 
             Column(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
-                    modifier = Modifier.weight(8.5f),
+                    modifier = Modifier.fillMaxSize().weight(.9f),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                 ) {
                     items(items = cartUiState.products) { product ->
@@ -98,7 +99,7 @@ fun CartScreen(
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth().weight(1.5f)
+                    modifier = Modifier.fillMaxWidth().weight(.1f)
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
                     HorizontalDivider(
