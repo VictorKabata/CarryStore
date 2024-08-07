@@ -21,7 +21,7 @@ import kotlin.test.Test
 class MainViewModelTest {
 
     private lateinit var viewModel: MainScreenViewModel
-    private lateinit var cartRepository: CartRepository
+    private lateinit var cartRepository: FakeCartRepository
 
     @BeforeTest
     fun setup() {
@@ -55,7 +55,7 @@ class MainViewModelTest {
 
     @Test
     fun `getAllProducts updates errorMessage on failure`() = runTest {
-        //cartRepository.expectError(throwError = true)
+        cartRepository.expectError(throwError = true)
         viewModel.getAllProducts()
 
         viewModel.mainUiState.test {
