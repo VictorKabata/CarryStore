@@ -58,7 +58,7 @@ fun MainScreen(viewModel: MainScreenViewModel = koinViewModel<MainScreenViewMode
                 }
             }
         ) { paddingValues ->
-            Box(modifier = Modifier.padding(paddingValues)) {
+            Surface(modifier = Modifier.padding(paddingValues)) {
                 Navigation(navHostController = navHostController)
             }
         }
