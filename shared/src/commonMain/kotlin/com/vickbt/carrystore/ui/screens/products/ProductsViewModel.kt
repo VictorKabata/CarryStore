@@ -20,12 +20,7 @@ class ProductsViewModel(
     private val _productsUiState = MutableStateFlow(ProductsUiState(isLoading = true))
     val productsUiState = _productsUiState.asStateFlow()
 
-    init {
-        fetchProducts()
-    }
-
     fun fetchProducts() = viewModelScope.launch {
-        println("Calling fetch products")
         productsRepository.fetchProducts().collectLatest { result ->
             result.onSuccess { productsList ->
                 _productsUiState.update { it.copy(isLoading = false, products = productsList) }

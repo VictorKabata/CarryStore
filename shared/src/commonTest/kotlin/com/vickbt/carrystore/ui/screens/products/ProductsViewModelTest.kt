@@ -4,7 +4,6 @@ package com.vickbt.carrystore.ui.screens.products
 
 import app.cash.turbine.test
 import assertk.assertThat
-import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isNotNull
 import assertk.assertions.isNull
@@ -23,22 +22,21 @@ import kotlinx.coroutines.test.setMain
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertFails
 
 class ProductsViewModelTest {
 
+    // Subject under test
     private lateinit var viewModel: ProductsViewModel
-    private lateinit var productsRepository: FakeProductRepository
-    private lateinit var cartRepository: FakeCartRepository
+
+    private val productsRepository = FakeProductRepository()
+    private val cartRepository = FakeCartRepository()
 
     private val testDispatcher = UnconfinedTestDispatcher()
 
     @BeforeTest
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-
-        productsRepository = FakeProductRepository()
-        cartRepository = FakeCartRepository()
-
         viewModel = ProductsViewModel(productsRepository, cartRepository)
     }
 
@@ -48,7 +46,9 @@ class ProductsViewModelTest {
     }
 
     @Test
-    fun `getAllProducts updates cartItemCount on success`() = runTest(testDispatcher) {
+    fun `getAllProducts updates products on success`() = runTest(testDispatcher) {
+        viewModel.fetchProducts()
+
         viewModel.productsUiState.test {
             assertThat(awaitItem()).apply {
                 prop(ProductsUiState::isLoading).isFalse()
@@ -60,15 +60,19 @@ class ProductsViewModelTest {
 
     @Test
     fun `fetchProducts updates errorMessage on failure`() = runBlocking {
-        productsRepository.expectError(throwError = true)
+        productsRepository.shouldThrowError = true
+
+        viewModel.fetchProducts()
 
         viewModel.productsUiState.test {
-            assertThat(awaitError().message).isEqualTo("Error occurred!")
+            assertFails("Error occurred!") {
+                awaitError().message
+            }
         }
     }
 
     @Test
-    fun `saveProduct saves correct product`() = runTest {
+    fun `saveProduct saves correct product`() = runBlocking {
         val product = ProductHelper.product
 
         viewModel.saveProduct(product = product)
@@ -85,13 +89,15 @@ class ProductsViewModelTest {
     }
 
     @Test
-    fun `saveProduct updates errorMessage on failure`() = runTest {
+    fun `saveProduct updates errorMessage on failure`() = runBlocking {
         val product = ProductHelper.product
+
+        cartRepository.shouldThrowError = true
 
         viewModel.saveProduct(product = product)
 
         viewModel.productsUiState.test {
-            assertThat(awaitError().message).isEqualTo("Error occurred!")
+            assertFails("Error occurred!") { awaitError().message }
         }
     }
 }
