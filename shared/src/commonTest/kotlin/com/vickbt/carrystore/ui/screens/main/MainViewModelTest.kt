@@ -1,3 +1,8 @@
 package com.vickbt.carrystore.ui.screens.main
 
-class MainViewModelTest
+class MainViewModelTest{
+
+    lateinit var viewModelTest: MainScreenViewModel
+
+
+}

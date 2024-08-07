@@ -2,14 +2,15 @@ package com.vickbt.carrystore.ui.screens.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickbt.carrystore.data.datasources.CartRepository
+import com.vickbt.carrystore.data.datasources.CartRepositoryImpl
+import com.vickbt.carrystore.domain.repositories.CartRepository
 import com.vickbt.carrystore.utils.MainUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MainScreenViewModel(val cartRepository: CartRepository) : ViewModel() {
+class MainScreenViewModel(private val cartRepository: CartRepository) : ViewModel() {
 
     private val _mainUiState = MutableStateFlow(MainUiState())
     val mainUiState = _mainUiState.asStateFlow()

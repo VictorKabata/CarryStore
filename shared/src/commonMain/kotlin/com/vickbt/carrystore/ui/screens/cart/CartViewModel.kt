@@ -2,8 +2,9 @@ package com.vickbt.carrystore.ui.screens.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickbt.carrystore.data.datasources.CartRepository
+import com.vickbt.carrystore.data.datasources.CartRepositoryImpl
 import com.vickbt.carrystore.domain.models.Product
+import com.vickbt.carrystore.domain.repositories.CartRepository
 import com.vickbt.carrystore.utils.CartUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
