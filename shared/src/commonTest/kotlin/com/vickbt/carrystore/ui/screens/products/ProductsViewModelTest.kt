@@ -47,8 +47,6 @@ class ProductsViewModelTest {
 
     @Test
     fun `getAllProducts updates products on success`() = runTest(testDispatcher) {
-        viewModel.fetchProducts()
-
         viewModel.productsUiState.test {
             assertThat(awaitItem()).apply {
                 prop(ProductsUiState::isLoading).isFalse()
@@ -61,8 +59,6 @@ class ProductsViewModelTest {
     @Test
     fun `fetchProducts updates errorMessage on failure`() = runBlocking {
         productsRepository.shouldThrowError = true
-
-        viewModel.fetchProducts()
 
         viewModel.productsUiState.test {
             assertFails("Error occurred!") {
