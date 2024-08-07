@@ -14,5 +14,4 @@ interface CartRepository {
     suspend fun deleteCartProduct(id: Int)
 
     suspend fun deleteAllProducts()
-
 }

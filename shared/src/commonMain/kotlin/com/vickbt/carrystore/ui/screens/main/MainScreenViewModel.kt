@@ -2,7 +2,6 @@ package com.vickbt.carrystore.ui.screens.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickbt.carrystore.data.datasources.CartRepositoryImpl
 import com.vickbt.carrystore.domain.repositories.CartRepository
 import com.vickbt.carrystore.utils.MainUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,10 +13,6 @@ class MainScreenViewModel(private val cartRepository: CartRepository) : ViewMode
 
     private val _mainUiState = MutableStateFlow(MainUiState())
     val mainUiState = _mainUiState.asStateFlow()
-
-    init {
-        getAllProducts()
-    }
 
     fun getAllProducts() = viewModelScope.launch {
         try {

@@ -83,7 +83,7 @@ fun CartScreen(
                 ) {
                     items(items = cartUiState.products) { product ->
                         ItemCartProduct(
-                            modifier = Modifier.padding(vertical = 4.dp),
+                            modifier = Modifier.padding(vertical = 4.dp).animateItem(),
                             product = product,
                             onItemCountChanged = { itemCount ->
                                 viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))

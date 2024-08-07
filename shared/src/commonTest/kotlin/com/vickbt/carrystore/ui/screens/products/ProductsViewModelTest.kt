@@ -6,14 +6,16 @@ import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
+import assertk.assertions.isNotNull
 import assertk.assertions.isNull
-import assertk.assertions.isNullOrEmpty
-import assertk.assertions.isTrue
+import assertk.assertions.prop
 import com.vickbt.carrystore.domain.repositories.FakeCartRepository
 import com.vickbt.carrystore.domain.repositories.FakeProductRepository
 import com.vickbt.carrystore.utils.ProductHelper
+import com.vickbt.carrystore.utils.ProductsUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -28,13 +30,15 @@ class ProductsViewModelTest {
     private lateinit var productsRepository: FakeProductRepository
     private lateinit var cartRepository: FakeCartRepository
 
+    private val testDispatcher = UnconfinedTestDispatcher()
+
     @BeforeTest
     fun setup() {
-        val testDispatcher = UnconfinedTestDispatcher()
         Dispatchers.setMain(testDispatcher)
 
         productsRepository = FakeProductRepository()
         cartRepository = FakeCartRepository()
+
         viewModel = ProductsViewModel(productsRepository, cartRepository)
     }
 
@@ -44,24 +48,50 @@ class ProductsViewModelTest {
     }
 
     @Test
-    fun `fetchProducts updates products on success`() = runTest {
-        viewModel.fetchProducts()
-        viewModel.products.test {
-            assertThat(awaitItem().isLoading).isTrue()
-            assertThat(awaitItem().products).isNullOrEmpty()
-            awaitComplete()
-        }
-
-        val products = List(5) { ProductHelper.product }
-        products.forEach { cartRepository.saveProduct(product = it) }
-
-        viewModel.fetchProducts()
-        viewModel.products.test {
-            assertThat(awaitItem().isLoading).isFalse()
-            assertThat(awaitItem().products).isEqualTo(products)
-            assertThat(awaitItem().errorMessage).isNull()
-            awaitComplete()
+    fun `getAllProducts updates cartItemCount on success`() = runTest(testDispatcher) {
+        viewModel.productsUiState.test {
+            assertThat(awaitItem()).apply {
+                prop(ProductsUiState::isLoading).isFalse()
+                prop(ProductsUiState::products).isNotNull()
+                prop(ProductsUiState::errorMessage).isNull()
+            }
         }
     }
 
+    @Test
+    fun `fetchProducts updates errorMessage on failure`() = runBlocking {
+        productsRepository.expectError(throwError = true)
+
+        viewModel.productsUiState.test {
+            assertThat(awaitError().message).isEqualTo("Error occurred!")
+        }
+    }
+
+    @Test
+    fun `saveProduct saves correct product`() = runTest {
+        val product = ProductHelper.product
+
+        viewModel.saveProduct(product = product)
+
+        viewModel.fetchProducts()
+
+        viewModel.productsUiState.test {
+            assertThat(awaitItem()).apply {
+                prop(ProductsUiState::isLoading).isFalse()
+                prop(ProductsUiState::products).isNotNull()
+                prop(ProductsUiState::errorMessage).isNull()
+            }
+        }
+    }
+
+    @Test
+    fun `saveProduct updates errorMessage on failure`() = runTest {
+        val product = ProductHelper.product
+
+        viewModel.saveProduct(product = product)
+
+        viewModel.productsUiState.test {
+            assertThat(awaitError().message).isEqualTo("Error occurred!")
+        }
+    }
 }

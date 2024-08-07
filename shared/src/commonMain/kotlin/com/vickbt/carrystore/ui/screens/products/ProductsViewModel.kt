@@ -8,6 +8,7 @@ import com.vickbt.carrystore.domain.repositories.ProductsRepository
 import com.vickbt.carrystore.utils.ProductsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class ProductsViewModel(
 
     fun fetchProducts() = viewModelScope.launch {
         println("Calling fetch products")
-        productsRepository.fetchProducts().collect { result ->
+        productsRepository.fetchProducts().collectLatest { result ->
             result.onSuccess { productsList ->
                 _productsUiState.update { it.copy(isLoading = false, products = productsList) }
             }.onFailure { error ->
