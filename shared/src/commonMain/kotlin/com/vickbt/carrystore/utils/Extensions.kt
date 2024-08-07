@@ -10,6 +10,7 @@ import coil3.util.DebugLogger
 fun PlatformContext.getAsyncImageLoader() = ImageLoader.Builder(this)
     .crossfade(true)
     .memoryCachePolicy(CachePolicy.ENABLED)
+    .crossfade(true)
     .memoryCache {
         MemoryCache.Builder().maxSizePercent(this, 0.3).strongReferencesEnabled(true).build()
     }
