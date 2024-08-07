@@ -14,6 +14,10 @@ class MainScreenViewModel(private val cartRepository: CartRepository) : ViewMode
     private val _mainUiState = MutableStateFlow(MainUiState())
     val mainUiState = _mainUiState.asStateFlow()
 
+    init {
+        getAllProducts()
+    }
+
     fun getAllProducts() = viewModelScope.launch {
         try {
             cartRepository.getAllProducts().collectLatest { products ->

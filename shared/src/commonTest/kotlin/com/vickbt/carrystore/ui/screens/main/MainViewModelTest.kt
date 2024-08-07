@@ -21,7 +21,9 @@ import kotlin.test.Test
 
 class MainViewModelTest {
 
+    // Subject under test
     private lateinit var viewModel: MainScreenViewModel
+
     private var cartRepository = FakeCartRepository()
 
     private val testDispatcher = UnconfinedTestDispatcher()

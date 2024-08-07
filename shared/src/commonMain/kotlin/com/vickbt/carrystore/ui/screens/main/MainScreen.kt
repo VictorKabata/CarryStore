@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -28,10 +27,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun MainScreen(viewModel: MainScreenViewModel = koinViewModel<MainScreenViewModel>()) {
     CarryStoreTheme {
-        LaunchedEffect(Unit) {
-            viewModel.getAllProducts()
-        }
-
         val mainScreenUiState = viewModel.mainUiState.collectAsState().value
 
         val navHostController = rememberNavController()

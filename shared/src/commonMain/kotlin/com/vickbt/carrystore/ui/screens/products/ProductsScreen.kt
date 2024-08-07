@@ -53,10 +53,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun ProductsScreen(
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.fetchProducts()
-    }
-
     val productsUiState = viewModel.productsUiState.collectAsState().value
 
     val localDensity = LocalDensity.current
