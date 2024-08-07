@@ -18,7 +18,7 @@ coil = "3.0.0-alpha06"
 kotlinxSerializationJson = "1.7.1"
 kotlinxDateTime = "0.6.0"
 ktor = "2.3.12"
-sqlDelight = "2.0.2"
+sqlDelight = "2.0.1"
 
 assertK="0.28.1"
 turbine="1.1.0"
@@ -77,7 +77,7 @@ coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref
 coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
 coil-multiplatform = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 
-sqlDelight = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+sqlDelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
 sqlDelight-coroutine = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }

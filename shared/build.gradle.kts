@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
@@ -12,14 +15,14 @@ plugins {
     alias(libs.plugins.sqlDelight)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 
@@ -77,15 +80,15 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
             implementation(libs.coroutines.test)
+            implementation(compose.uiTest)
             implementation(libs.ktor.mock)
             implementation(libs.assertK)
-            implementation(libs.sqlDelight.sqliteDriver)
+            implementation(libs.sqlDelight.runtime)
             implementation(libs.turbine)
         }
 
         androidMain.dependencies {
             implementation(libs.ktor.android)
-
             implementation(libs.sqlDelight.android)
         }
 
@@ -103,15 +106,16 @@ android {
         minSdk = 24
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
+    /*ToDo: Confirm this does not affect tests
     testOptions {
         unitTests {
             isReturnDefaultValues = true
         }
-    }
+    }*/
 }
 
 sqldelight {
