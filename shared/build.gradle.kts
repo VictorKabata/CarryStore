@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -15,10 +17,9 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_1_8.toString()
-            }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
 
@@ -43,7 +44,7 @@ kotlin {
     }
 
     sourceSets {
-        sourceSets["commonMain"].dependencies {
+        commonMain.dependencies {
             // Jetpack Compose - UI
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -72,7 +73,7 @@ kotlin {
             implementation(libs.bundles.coil)
         }
 
-        sourceSets["commonTest"].dependencies {
+        commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
             implementation(libs.coroutines.test)
@@ -82,13 +83,13 @@ kotlin {
             implementation(libs.turbine)
         }
 
-        sourceSets["androidMain"].dependencies {
+        androidMain.dependencies {
             implementation(libs.ktor.android)
 
             implementation(libs.sqlDelight.android)
         }
 
-        sourceSets["iosMain"].dependencies {
+        iosMain.dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)
         }
