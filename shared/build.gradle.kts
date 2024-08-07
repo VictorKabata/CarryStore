@@ -74,6 +74,12 @@ kotlin {
 
         sourceSets["commonTest"].dependencies {
             implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.coroutines.test)
+            implementation(libs.ktor.mock)
+            implementation(libs.assertK)
+            implementation(libs.sqlDelight.sqliteDriver)
+            implementation(libs.turbine)
         }
 
         sourceSets["androidMain"].dependencies {
@@ -98,6 +104,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+        }
     }
 }
 

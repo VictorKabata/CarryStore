@@ -3,16 +3,16 @@ package com.vickbt.carrystore.data.cache.sqldelight.daos
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
+import app.cash.sqldelight.db.SqlDriver
 import com.vickbt.carrystore.domain.models.Product
-import com.vickbt.carrystore.utils.DatabaseDriverFactory
 import com.vickbt.shared.data.cache.sqldelight.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
-class CartDao(private val databaseDriverFactory: DatabaseDriverFactory) {
+class CartDao(private val sqlDriver: SqlDriver) {
 
-    private val appDatabase = AppDatabase(databaseDriverFactory.createDriver())
+    private val appDatabase = AppDatabase(sqlDriver)
     val dbQuery = appDatabase.appDatabaseQueries
 
     suspend fun saveProduct(product: Product) = withContext(Dispatchers.IO) {

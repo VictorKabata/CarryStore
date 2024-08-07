@@ -25,3 +25,12 @@ jobs:
 
       - name: Build with gradle
         run: ./gradlew build --stacktrace
+
+      - name: Execute unit tests
+        run: ./gradlew :shared:check --stacktrace
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: unit_tests_report.html
+          path: shared/build/reports/tests/allTests/

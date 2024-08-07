@@ -9,7 +9,8 @@ class CartRepository(private val cartDao: CartDao) {
 
     suspend fun saveProduct(product: Product) = cartDao.saveProduct(product)
 
-    suspend fun getAllProducts() = cartDao.getAllProducts().map { it.map { it.toDomain() } }
+    suspend fun getAllProducts() =
+        cartDao.getAllProducts().map { it.map { product -> product.toDomain() } }
 
     suspend fun getProduct(id: Int) = cartDao.getProduct(id).map { it?.toDomain() }
 
