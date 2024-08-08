@@ -20,8 +20,17 @@ This cross-platform e-commerce application leverages Kotlin Multiplatform and [J
 ./gradlew installDebug
 ```
 
-The android application can also be downloaded via [Firebase App Distribution]()
+The android application can also be downloaded via [Firebase App Distribution](https://firebase.google.com/docs/app-distribution).
 
-<img src="https://img.shields.io/badge/-Download Android App-3DDC84?logo=android&logoColor=white&style=for-the-badge">
+<a href="https://appdistribution.firebase.dev/i/fbdf7f318b033002">
+  <img src="https://img.shields.io/badge/-Download Android App-3DDC84?logo=android&logoColor=white&style=for-the-badge" alt="Download Android app" />
+</a>
 
 ### iOS
+
+- Navigate to __Run -> Edit__ Configurations in the Android Studio main menu.
+- Click the plus sign and select __iOS Application__.
+- Give the configuration a descriptive name then locate and select the __app-ios.xworkspace__ file in the ___app-ios___ module.
+- Select the desired iOS simulator from the execution target list.
+
+
