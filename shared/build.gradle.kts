@@ -3,7 +3,7 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -24,8 +24,10 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
+
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -91,7 +93,11 @@ kotlin {
         }
 
         sourceSets["androidUnitTest"].dependencies {
-            // implementation(libs.sqlDelight.sqliteDriver)
+            implementation(libs.sqlDelight.sqliteDriver)
+        }
+
+        sourceSets["androidInstrumentedTest"].dependencies {
+            implementation(libs.sqlDelight.sqliteDriver)
         }
 
         iosMain.dependencies {
@@ -106,18 +112,12 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
-    /*ToDo: Confirm this does not affect tests
-    testOptions {
-        unitTests {
-            isReturnDefaultValues = true
-        }
-    }*/
 }
 
 sqldelight {
