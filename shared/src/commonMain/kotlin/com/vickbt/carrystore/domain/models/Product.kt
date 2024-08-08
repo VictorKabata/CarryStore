@@ -4,7 +4,7 @@ data class Product(
     val id: Int,
     val name: String,
     val description: String,
-    val price: Double,
+    val price: Int, // Ideally, this should be BigInt
     val currencyCode: String,
     val currencySymbol: String,
     val quantity: Int,

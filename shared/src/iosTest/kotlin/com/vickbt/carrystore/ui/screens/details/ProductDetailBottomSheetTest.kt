@@ -22,7 +22,7 @@ class ProductDetailBottomSheetTest {
             id = Random.nextInt(),
             name = Random.nextInt().toString(),
             description = Random.nextInt().toString(),
-            price = Random.nextDouble(),
+            price = Random.nextInt(),
             currencyCode = Random.nextInt().toString(),
             currencySymbol = Random.nextInt().toString(),
             quantity = Random.nextInt(),
