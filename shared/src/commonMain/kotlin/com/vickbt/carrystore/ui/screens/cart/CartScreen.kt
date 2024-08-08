@@ -3,7 +3,6 @@
 package com.vickbt.carrystore.ui.screens.cart
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -19,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -46,12 +46,11 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun CartScreen(
     navHostController: NavHostController,
-    paddingValues: PaddingValues = PaddingValues(),
     viewModel: CartViewModel = koinViewModel<CartViewModel>()
 ) {
     val cartUiState = viewModel.cartUiState.collectAsState().value
 
-    Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+    Scaffold(modifier = Modifier.fillMaxSize()) {
         if (cartUiState.isLoading) {
             CircularProgressIndicator()
         } else if (!cartUiState.errorMessage.isNullOrEmpty()) {
@@ -79,12 +78,12 @@ fun CartScreen(
 
             Column(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
-                    modifier = Modifier.weight(8.5f),
+                    modifier = Modifier.fillMaxSize().weight(.9f),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                 ) {
                     items(items = cartUiState.products) { product ->
                         ItemCartProduct(
-                            modifier = Modifier.padding(vertical = 4.dp),
+                            modifier = Modifier.padding(vertical = 4.dp).animateItem(),
                             product = product,
                             onItemCountChanged = { itemCount ->
                                 viewModel.saveProduct(product = product.copy(cartQuantity = itemCount))
@@ -97,7 +96,7 @@ fun CartScreen(
                 }
 
                 Column(
-                    modifier = Modifier.fillMaxWidth().weight(1.5f)
+                    modifier = Modifier.fillMaxWidth().weight(.1f)
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
                     HorizontalDivider(

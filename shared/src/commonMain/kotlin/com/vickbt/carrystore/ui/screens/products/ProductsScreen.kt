@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -23,7 +22,6 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -53,10 +51,9 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun ProductsScreen(
-    paddingValues: PaddingValues = PaddingValues(),
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
-    val productsUiState = viewModel.products.collectAsState().value
+    val productsUiState = viewModel.productsUiState.collectAsState().value
 
     val localDensity = LocalDensity.current
     var sheetContentHeight by remember { mutableStateOf(Dp.Unspecified) }
@@ -73,74 +70,72 @@ fun ProductsScreen(
 
     LaunchedEffect(!sheetState.isVisible) { itemCount = 1 }
 
-    Scaffold(modifier = Modifier.padding(paddingValues)) {
-        BottomSheetScaffold(
-            scaffoldState = bottomSheetScaffoldState,
-            sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-            sheetContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-            sheetContent = {
-                selectedProduct?.let { product ->
-                    ProductBottomSheet(
-                        modifier = Modifier.fillMaxWidth().height(sheetContentHeight)
-                            .onGloballyPositioned { coordinates ->
-                                sheetContentHeight = with(localDensity) {
-                                    coordinates.size.height.toDp()
-                                }
-                            },
-                        product = product,
-                        onItemCountChanged = { newValue ->
-                            cartQuantity = newValue
+    BottomSheetScaffold(
+        scaffoldState = bottomSheetScaffoldState,
+        sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+        sheetContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+        sheetContent = {
+            selectedProduct?.let { product ->
+                ProductBottomSheet(
+                    modifier = Modifier.fillMaxWidth().height(sheetContentHeight)
+                        .onGloballyPositioned { coordinates ->
+                            sheetContentHeight = with(localDensity) {
+                                coordinates.size.height.toDp()
+                            }
                         },
-                        onAddToCartClicked = {
-                            viewModel.saveProduct(product = it.copy(cartQuantity = cartQuantity))
-                            scope.launch { sheetState.hide() }
-                        },
-                        onBuyNowClicked = { scope.launch { sheetState.hide() } },
-                        itemCount = itemCount,
-                        onDecrement = { itemCount-- },
-                        onIncrement = { itemCount++ }
-                    )
-                }
+                    product = product,
+                    onItemCountChanged = { newValue ->
+                        cartQuantity = newValue
+                    },
+                    onAddToCartClicked = {
+                        viewModel.saveProduct(product = it.copy(cartQuantity = cartQuantity))
+                        scope.launch { sheetState.hide() }
+                    },
+                    onBuyNowClicked = { scope.launch { sheetState.hide() } },
+                    itemCount = itemCount,
+                    onDecrement = { itemCount-- },
+                    onIncrement = { itemCount++ }
+                )
             }
-        ) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                if (productsUiState.isLoading) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
-                    ErrorState(
-                        modifier = Modifier.align(Alignment.Center),
-                        errorIcon = Icons.Rounded.Error,
-                        errorMessage = productsUiState.errorMessage,
-                        actionMessage = stringResource(Res.string.reload),
-                        action = { viewModel.fetchProducts() }
+        }
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (productsUiState.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
+                ErrorState(
+                    modifier = Modifier.align(Alignment.Center),
+                    errorIcon = Icons.Rounded.Error,
+                    errorMessage = productsUiState.errorMessage,
+                    actionMessage = stringResource(Res.string.reload),
+                    action = { viewModel.fetchProducts() }
+                )
+            } else {
+                LazyVerticalGrid(
+                    modifier = Modifier.fillMaxSize().align(Alignment.Center),
+                    columns = GridCells.Fixed(2),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        8.dp,
+                        Alignment.CenterHorizontally
                     )
-                } else {
-                    LazyVerticalGrid(
-                        modifier = Modifier.fillMaxSize().align(Alignment.Center),
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(
-                            8.dp,
-                            Alignment.CenterHorizontally
-                        )
-                    ) {
-                        items(productsUiState.products ?: emptyList()) { product ->
-                            ItemProduct(
-                                modifier = Modifier,
-                                product = product,
-                                onClick = {
-                                    scope.launch {
-                                        if (!sheetState.isVisible) {
-                                            selectedProduct = product
-                                            sheetState.expand()
-                                        } else {
-                                            sheetState.hide()
-                                        }
+                ) {
+                    items(productsUiState.products ?: emptyList()) { product ->
+                        ItemProduct(
+                            modifier = Modifier,
+                            product = product,
+                            onClick = {
+                                scope.launch {
+                                    if (!sheetState.isVisible) {
+                                        selectedProduct = product
+                                        sheetState.expand()
+                                    } else {
+                                        sheetState.hide()
                                     }
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
                 }
             }

@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -49,6 +50,7 @@ fun Counter(
     ) {
         IconButton(
             modifier = Modifier
+                .testTag("button_decrement")
                 .size(countButtonSize)
                 .combinedClickable(
                     onClick = { onDecrement(count) },
@@ -71,7 +73,7 @@ fun Counter(
         }
 
         Text(
-            modifier = Modifier.padding(horizontal = 8.dp),
+            modifier = Modifier.testTag("text_count").padding(horizontal = 8.dp),
             text = count.toString(),
             color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,
@@ -82,6 +84,7 @@ fun Counter(
 
         IconButton(
             modifier = Modifier
+                .testTag("button_increment")
                 .size(countButtonSize)
                 .combinedClickable(
                     onClick = { onIncrement(count) },

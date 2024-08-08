@@ -1,4 +1,8 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -10,25 +14,22 @@ plugins {
     alias(libs.plugins.sqlDelight)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_1_8.toString()
-            }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        when {
-            System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-            System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
-            else -> ::iosX64
-        }
-    iosTarget("ios") {}
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    )
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -43,7 +44,7 @@ kotlin {
     }
 
     sourceSets {
-        sourceSets["commonMain"].dependencies {
+        commonMain.dependencies {
             // Jetpack Compose - UI
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -72,19 +73,46 @@ kotlin {
             implementation(libs.bundles.coil)
         }
 
-        sourceSets["commonTest"].dependencies {
+        commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.coroutines.test)
+            implementation(compose.uiTest)
+            implementation(libs.ktor.mock)
+            implementation(libs.assertK)
+            implementation(libs.sqlDelight.runtime)
+            implementation(libs.turbine)
+            implementation(compose.uiTest)
         }
 
-        sourceSets["androidMain"].dependencies {
+        androidMain.dependencies {
             implementation(libs.ktor.android)
-
             implementation(libs.sqlDelight.android)
         }
 
-        sourceSets["iosMain"].dependencies {
+        sourceSets["androidUnitTest"].dependencies {
+            implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+
+            implementation(compose.uiTest)
+
+            implementation(libs.sqlDelight.sqliteDriver)
+            implementation(libs.androidx.ui.test.junit4)
+            implementation(libs.androidx.ui.test.manifest)
+            implementation(libs.robolectric)
+        }
+
+        sourceSets["androidInstrumentedTest"].dependencies {
+            implementation(libs.sqlDelight.sqliteDriver)
+        }
+
+        iosMain.dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)
+            implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.coroutines.test)
+            implementation(compose.uiTest)
         }
     }
 }
@@ -94,11 +122,13 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
+    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 sqldelight {
