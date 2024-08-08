@@ -33,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: unit_tests_report.html
-          path: shared/build/reports/tests/allTests/
+          path: shared/build/reports/kover/html/
