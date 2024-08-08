@@ -2,9 +2,9 @@ package com.vickbt.carrystore.ui.screens.products
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickbt.carrystore.data.datasources.CartRepository
-import com.vickbt.carrystore.data.datasources.ProductsRepository
 import com.vickbt.carrystore.domain.models.Product
+import com.vickbt.carrystore.domain.repositories.CartRepository
+import com.vickbt.carrystore.domain.repositories.ProductsRepository
 import com.vickbt.carrystore.utils.ProductsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,8 +17,8 @@ class ProductsViewModel(
     private val cartRepository: CartRepository
 ) : ViewModel() {
 
-    private val _products = MutableStateFlow(ProductsUiState(isLoading = true))
-    val products = _products.asStateFlow()
+    private val _productsUiState = MutableStateFlow(ProductsUiState(isLoading = true))
+    val productsUiState = _productsUiState.asStateFlow()
 
     init {
         fetchProducts()
@@ -27,9 +27,9 @@ class ProductsViewModel(
     fun fetchProducts() = viewModelScope.launch {
         productsRepository.fetchProducts().collectLatest { result ->
             result.onSuccess { productsList ->
-                _products.update { it.copy(isLoading = false, products = productsList) }
+                _productsUiState.update { it.copy(isLoading = false, products = productsList) }
             }.onFailure { error ->
-                _products.update { it.copy(isLoading = false, errorMessage = error.message) }
+                _productsUiState.update { it.copy(isLoading = false, errorMessage = error.message) }
             }
         }
     }
@@ -38,7 +38,7 @@ class ProductsViewModel(
         try {
             cartRepository.saveProduct(product = product)
         } catch (e: Exception) {
-            _products.update { it.copy(errorMessage = e.message) }
+            _productsUiState.update { it.copy(errorMessage = e.message) }
         }
     }
 }

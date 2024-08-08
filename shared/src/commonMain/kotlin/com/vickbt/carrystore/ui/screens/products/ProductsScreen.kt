@@ -53,7 +53,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun ProductsScreen(
     viewModel: ProductsViewModel = koinViewModel<ProductsViewModel>()
 ) {
-    val productsUiState = viewModel.products.collectAsState().value
+    val productsUiState = viewModel.productsUiState.collectAsState().value
 
     val localDensity = LocalDensity.current
     var sheetContentHeight by remember { mutableStateOf(Dp.Unspecified) }

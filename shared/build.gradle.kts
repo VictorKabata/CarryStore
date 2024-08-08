@@ -82,6 +82,7 @@ kotlin {
             implementation(libs.assertK)
             implementation(libs.sqlDelight.runtime)
             implementation(libs.turbine)
+            implementation(compose.uiTest)
         }
 
         androidMain.dependencies {
@@ -108,7 +109,6 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)
-
             implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
             implementation(libs.coroutines.test)

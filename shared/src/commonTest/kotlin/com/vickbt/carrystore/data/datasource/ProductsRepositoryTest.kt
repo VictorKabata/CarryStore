@@ -3,7 +3,7 @@ package com.vickbt.carrystore.data.datasource
 import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.vickbt.carrystore.data.datasources.ProductsRepository
+import com.vickbt.carrystore.data.datasources.ProductsRepositoryImpl
 import com.vickbt.carrystore.data.network.FakeApiService
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
@@ -11,13 +11,13 @@ import kotlin.test.Test
 
 class ProductsRepositoryTest {
 
-    private lateinit var productsRepository: ProductsRepository
+    private lateinit var productsRepository: ProductsRepositoryImpl
     private lateinit var fakeApiService: FakeApiService
 
     @BeforeTest
     fun setup() {
         fakeApiService = FakeApiService()
-        productsRepository = ProductsRepository(fakeApiService)
+        productsRepository = ProductsRepositoryImpl(fakeApiService)
     }
 
     @Test

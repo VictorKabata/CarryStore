@@ -6,7 +6,7 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
 import assertk.assertions.isNullOrEmpty
 import com.vickbt.carrystore.data.cache.sqldelight.daos.CartDao
-import com.vickbt.carrystore.data.datasources.CartRepository
+import com.vickbt.carrystore.data.datasources.CartRepositoryImpl
 import com.vickbt.carrystore.utils.ProductHelper
 import com.vickbt.carrystore.utils.createTestDriver
 import com.vickbt.shared.data.cache.sqldelight.AppDatabase
@@ -17,7 +17,7 @@ import kotlin.test.Test
 
 class CartRepositoryTest {
 
-    private lateinit var cartRepository: CartRepository
+    private lateinit var cartRepository: CartRepositoryImpl
 
     private lateinit var database: AppDatabase
     private lateinit var cartDao: CartDao
@@ -28,7 +28,7 @@ class CartRepositoryTest {
         database = AppDatabase(databaseDriver)
         cartDao = CartDao(sqlDriver = databaseDriver)
 
-        cartRepository = CartRepository(cartDao)
+        cartRepository = CartRepositoryImpl(cartDao)
     }
 
     @AfterTest

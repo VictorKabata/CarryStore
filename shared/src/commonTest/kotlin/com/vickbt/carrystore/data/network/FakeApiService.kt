@@ -6,7 +6,7 @@ import com.vickbt.carrystore.utils.ProductHelper
 class FakeApiService : ApiService {
 
     private var hasError: Boolean = false
-    private var thrownError: Exception = Exception("Error occurred")
+    private var thrownError: Exception = Exception("Error occurred!")
 
     fun expectError(
         throwError: Boolean = false,
