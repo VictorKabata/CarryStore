@@ -4,7 +4,6 @@ package com.vickbt.carrystore.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,7 +27,6 @@ import androidx.compose.ui.window.Dialog
 import carrystore.shared.generated.resources.Res
 import carrystore.shared.generated.resources.nunito
 import carrystore.shared.generated.resources.ok
-import carrystore.shared.generated.resources.reload
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 

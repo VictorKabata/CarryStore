@@ -78,7 +78,7 @@ fun CartScreen(
                 errorMessage = stringResource(Res.string.cart_empty),
                 actionMessage = stringResource(Res.string.shop_now)
             ) {
-                navHostController.navigate(NavigationItem.Products.route){
+                navHostController.navigate(NavigationItem.Products.route) {
                     popUpTo(
                         navHostController.graph.startDestinationRoute
                             ?: NavigationItem.Products.route
