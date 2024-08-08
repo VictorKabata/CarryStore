@@ -8,7 +8,7 @@ fun ProductDto.toDomain(): Product {
         id = this.id,
         name = this.name,
         description = this.description,
-        price = this.price.toDouble(),
+        price = this.price,
         currencyCode = this.currencyCode,
         currencySymbol = this.currencySymbol,
         quantity = this.quantity,

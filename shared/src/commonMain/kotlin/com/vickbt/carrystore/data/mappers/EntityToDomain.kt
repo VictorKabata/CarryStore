@@ -8,7 +8,7 @@ fun ProductEntity.toDomain(): Product {
         id = id.toInt(),
         name = name,
         description = description,
-        price = price.toDouble(),
+        price = price.toInt(),
         currencyCode = currencyCode,
         currencySymbol = currencySymbol,
         quantity = quantity.toInt(),
