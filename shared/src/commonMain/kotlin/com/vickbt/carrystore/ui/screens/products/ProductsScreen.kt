@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.CircularProgressIndicator
@@ -40,9 +41,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import carrystore.shared.generated.resources.Res
 import carrystore.shared.generated.resources.reload
+import carrystore.shared.generated.resources.successful_purchase
 import com.vickbt.carrystore.domain.models.Product
-import com.vickbt.carrystore.ui.components.ErrorState
+import com.vickbt.carrystore.ui.components.InfoItem
 import com.vickbt.carrystore.ui.components.ItemProduct
+import com.vickbt.carrystore.ui.components.StatusDialog
 import com.vickbt.carrystore.ui.screens.details.ProductBottomSheet
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -62,6 +65,8 @@ fun ProductsScreen(
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
+
+    var shouldShowDialog by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
@@ -91,7 +96,10 @@ fun ProductsScreen(
                         viewModel.saveProduct(product = it.copy(cartQuantity = cartQuantity))
                         scope.launch { sheetState.hide() }
                     },
-                    onBuyNowClicked = { scope.launch { sheetState.hide() } },
+                    onBuyNowClicked = {
+                        shouldShowDialog = true
+                        scope.launch { sheetState.hide() }
+                    },
                     itemCount = itemCount,
                     onDecrement = { itemCount-- },
                     onIncrement = { itemCount++ }
@@ -103,7 +111,7 @@ fun ProductsScreen(
             if (productsUiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             } else if (!productsUiState.errorMessage.isNullOrEmpty()) {
-                ErrorState(
+                InfoItem(
                     modifier = Modifier.align(Alignment.Center),
                     errorIcon = Icons.Rounded.Error,
                     errorMessage = productsUiState.errorMessage,
@@ -140,5 +148,15 @@ fun ProductsScreen(
                 }
             }
         }
+    }
+
+    if (shouldShowDialog) {
+        StatusDialog(
+            modifier = Modifier,
+            icon = Icons.Rounded.CheckCircle,
+            message = stringResource(Res.string.successful_purchase),
+            action = { shouldShowDialog = false },
+            onDismiss = { shouldShowDialog = false }
+        )
     }
 }
