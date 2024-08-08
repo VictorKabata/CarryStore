@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -48,14 +49,14 @@ fun ProductBottomSheet(
 ) {
     val columnScrollState = rememberScrollState()
 
-    Box(modifier = modifier) {
+    Box(modifier = modifier.testTag("screen_details")) {
         Column(
             modifier = Modifier.verticalScroll(columnScrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
         ) {
             AsyncImage(
-                modifier = Modifier.fillMaxSize(.40f),
+                modifier = Modifier.testTag("image_product").fillMaxSize(.40f),
                 model = product.imageLocation,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
@@ -68,6 +69,7 @@ fun ProductBottomSheet(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
+                    modifier = Modifier.testTag("text_product_name"),
                     text = product.name,
                     fontSize = 24.sp,
                     maxLines = 1,
@@ -78,6 +80,7 @@ fun ProductBottomSheet(
                 )
 
                 Text(
+                    modifier = Modifier.testTag("text_product_price"),
                     text = "${product.currencyCode} ${product.price}",
                     fontSize = 24.sp,
                     maxLines = 1,
@@ -107,7 +110,7 @@ fun ProductBottomSheet(
                 )
 
                 Text(
-                    modifier = Modifier,
+                    modifier = Modifier.testTag("text_product_description"),
                     text = product.description,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
@@ -118,7 +121,7 @@ fun ProductBottomSheet(
             //endregion
 
             Counter(
-                modifier = Modifier.fillMaxWidth(.80f),
+                modifier = Modifier.testTag("counter").fillMaxWidth(.80f),
                 count = itemCount,
                 maxCount = product.quantity,
                 onIncrement = {
@@ -140,7 +143,7 @@ fun ProductBottomSheet(
                 verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
             ) {
                 Button(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    modifier = Modifier.testTag("button_add_to_cart").fillMaxWidth().padding(vertical = 8.dp),
                     onClick = { onAddToCartClicked(product) },
                     shape = MaterialTheme.shapes.extraLarge,
                     colors = ButtonDefaults.buttonColors(
