@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTestApi::class, ExperimentalTestApi::class)
 
-package com.vickbt.carrystore.ui.details
+package com.vickbt.carrystore.ui.screens.details
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,15 +10,25 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.runComposeUiTest
-import com.vickbt.carrystore.ui.screens.details.ProductBottomSheet
-import com.vickbt.carrystore.utils.ProductHelper
+import com.vickbt.carrystore.domain.models.Product
+import kotlin.random.Random
 import kotlin.test.Test
 
 class ProductDetailBottomSheetTest {
 
     @Test
-    fun `test_initial_state`() = runComposeUiTest {
-        val product = ProductHelper.product
+    fun test_initial_state() = runComposeUiTest {
+        val product = Product(
+            id = Random.nextInt(),
+            name = Random.nextInt().toString(),
+            description = Random.nextInt().toString(),
+            price = Random.nextDouble(),
+            currencyCode = Random.nextInt().toString(),
+            currencySymbol = Random.nextInt().toString(),
+            quantity = Random.nextInt(),
+            imageLocation = Random.nextInt().toString(),
+            status = Random.nextInt().toString()
+        )
         var itemCount by mutableStateOf(1)
 
         setContent {

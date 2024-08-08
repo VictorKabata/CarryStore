@@ -17,8 +17,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
         compose = true
@@ -54,7 +52,4 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.performance)
-
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:1.6.8")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
 }

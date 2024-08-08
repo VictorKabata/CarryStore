@@ -22,6 +22,7 @@ sqlDelight = "2.0.2"
 
 assertK = "0.28.1"
 turbine = "1.1.0"
+robolectric = "4.12"
 
 #Android Versions
 appCompat = "1.7.0"
@@ -99,7 +100,9 @@ assertK = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assert
 sqlDelight-sqliteDriver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeMultiplatform" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "composeMultiplatform" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 
 [bundles]
 ktor = ["ktor-core", "ktor-contentNegotiation", "ktor-json", "ktor-logging"]
