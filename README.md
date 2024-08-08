@@ -16,6 +16,7 @@ This cross-platform e-commerce application leverages Kotlin Multiplatform and [J
 - Open the project in Android Studio.
 - Connect your physical device or open an emulator.
 - Run the gradle command below from Android Studio terminal to build and install the android application on the connected android device/emulator.
+
 ```bash
 ./gradlew installDebug
 ```
@@ -33,5 +34,25 @@ The android application can also be downloaded via [Firebase App Distribution](h
 - Give the configuration a descriptive name then locate and select the __app-ios.xworkspace__ file in the ___app-ios___ module.
 - Select the desired iOS simulator from the execution target list.
 
-<img width="853" alt="Screenshot 2024-08-08 at 14 49 08" src="https://github.com/user-attachments/assets/0e1bf69c-af9f-43e0-921c-c85bc344434d">
+<p align="center">
+<img src="images/ios_setup.png" width="500">
+</p>
+
+The iOS application can also be downloaded via Firebase App Distribution
+
+<a href="https://appdistribution.firebase.dev/i/fbdf7f318b033002">
+  <img src="https://img.shields.io/badge/-Download iOS App-007AFF?logo=apple&logoColor=white&style=for-the-badge" alt="Download Android app" />
+</a>
+
+### Screenshots
+
+### Android
+
+<img src="images/android1.png" width="250"/> <img src="images/android2.png" width="250"/> <img src="images/android3.png" width="250"/> <img src="images/android4.png" width="250"/> 
+
+### iOS
+<img src="images/ios1.png" width="250"/> <img src="images/ios2.png" width="250"/> <img src="images/ios3.png" width="250"/> <img src="images/ios4.png" width="250"/> 
+
+
+
 
