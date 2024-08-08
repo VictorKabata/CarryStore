@@ -92,6 +92,10 @@ kotlin {
             implementation(libs.sqlDelight.android)
         }
 
+        sourceSets["androidUnitTest"].dependencies {
+            // implementation(libs.sqlDelight.sqliteDriver)
+        }
+
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
             implementation(libs.sqlDelight.native)

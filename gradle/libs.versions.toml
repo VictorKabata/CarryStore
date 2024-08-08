@@ -18,10 +18,10 @@ coil = "3.0.0-alpha06"
 kotlinxSerializationJson = "1.7.1"
 kotlinxDateTime = "0.6.0"
 ktor = "2.3.12"
-sqlDelight = "2.0.1"
+sqlDelight = "2.0.2"
 
-assertK="0.28.1"
-turbine="1.1.0"
+assertK = "0.28.1"
+turbine = "1.1.0"
 
 #Android Versions
 appCompat = "1.7.0"
@@ -81,6 +81,7 @@ sqlDelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sq
 sqlDelight-coroutine = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqlDelight-sqlDriver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
@@ -95,10 +96,10 @@ appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat"
 
 #Test Dependencies
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-assertK={module="com.willowtreeapps.assertk:assertk", version.ref="assertK"}
-sqlDelight-sqliteDriver={module="app.cash.sqldelight:sqlite-driver", version.ref="sqlDelight"}
-turbine={module="app.cash.turbine:turbine", version.ref="turbine"}
-coroutines-test={module="org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref="coroutines"}
+assertK = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertK" }
+sqlDelight-sqliteDriver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 
 [bundles]
