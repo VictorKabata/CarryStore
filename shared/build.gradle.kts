@@ -149,8 +149,6 @@ kover {
                 minBound(20)
             }
         }
-
-
     }
 }
 
