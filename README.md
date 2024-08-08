@@ -33,4 +33,5 @@ The android application can also be downloaded via [Firebase App Distribution](h
 - Give the configuration a descriptive name then locate and select the __app-ios.xworkspace__ file in the ___app-ios___ module.
 - Select the desired iOS simulator from the execution target list.
 
+<img width="853" alt="Screenshot 2024-08-08 at 14 49 08" src="https://github.com/user-attachments/assets/0e1bf69c-af9f-43e0-921c-c85bc344434d">
 
