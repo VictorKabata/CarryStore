@@ -76,7 +76,16 @@ fun BottomNavBar(
                 ),
                 selected = isSelected,
                 onClick = {
-                    if (item.route != currentDestination) navHostController.navigate(route = item.route)
+                    if (item.route != currentDestination) {
+                        navHostController.navigate(route = item.route) {
+                            popUpTo(
+                                navHostController.graph.startDestinationRoute
+                                    ?: NavigationItem.Products.route
+                            )
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
                 }
             )
         }

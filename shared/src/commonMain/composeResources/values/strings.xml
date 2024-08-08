@@ -6,6 +6,8 @@
 
     <string name="reload">Reload</string>
 
+    <string name="ok">Ok</string>
+
     <string name="cart_empty">Cart is empty</string>
     <string name="shop_now">Shop Now</string>
 
@@ -15,6 +17,7 @@
     <string name="buy_now">Buy Now</string>
 
     <string name="checkout">Checkout</string>
+    <string name="successful_purchase">Thank you for making the purchase. Your order is confirmed.</string>
 
     <string name="total">Total: </string>
 </resources>

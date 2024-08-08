@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.Button
@@ -22,6 +23,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -34,9 +39,11 @@ import carrystore.shared.generated.resources.checkout
 import carrystore.shared.generated.resources.nunito
 import carrystore.shared.generated.resources.reload
 import carrystore.shared.generated.resources.shop_now
+import carrystore.shared.generated.resources.successful_purchase
 import carrystore.shared.generated.resources.total
-import com.vickbt.carrystore.ui.components.ErrorState
+import com.vickbt.carrystore.ui.components.InfoItem
 import com.vickbt.carrystore.ui.components.ItemCartProduct
+import com.vickbt.carrystore.ui.components.StatusDialog
 import com.vickbt.carrystore.ui.navigation.NavigationItem
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
@@ -50,11 +57,13 @@ fun CartScreen(
 ) {
     val cartUiState = viewModel.cartUiState.collectAsState().value
 
+    var shouldShowDialog by remember { mutableStateOf(false) }
+
     Scaffold(modifier = Modifier.fillMaxSize()) {
         if (cartUiState.isLoading) {
             CircularProgressIndicator()
         } else if (!cartUiState.errorMessage.isNullOrEmpty()) {
-            ErrorState(
+            InfoItem(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.Person,
                 errorMessage = cartUiState.errorMessage,
@@ -63,13 +72,20 @@ fun CartScreen(
                 viewModel.getAllProducts()
             }
         } else if (cartUiState.products.isNullOrEmpty()) {
-            ErrorState(
+            InfoItem(
                 modifier = Modifier,
                 errorIcon = Icons.Rounded.ShoppingCart,
                 errorMessage = stringResource(Res.string.cart_empty),
                 actionMessage = stringResource(Res.string.shop_now)
             ) {
-                navHostController.navigate(NavigationItem.Products.route)
+                navHostController.navigate(NavigationItem.Products.route){
+                    popUpTo(
+                        navHostController.graph.startDestinationRoute
+                            ?: NavigationItem.Products.route
+                    )
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
         } else {
             val subTotal = cartUiState.products.sumOf { it.price * (it.cartQuantity ?: 1) }
@@ -133,6 +149,7 @@ fun CartScreen(
                             modifier = Modifier.weight(5f),
                             onClick = {
                                 viewModel.deleteAllCartProducts()
+                                shouldShowDialog = true
                             },
                             shape = MaterialTheme.shapes.extraLarge
                         ) {
@@ -147,6 +164,16 @@ fun CartScreen(
                     }
                 }
             }
+        }
+
+        if (shouldShowDialog) {
+            StatusDialog(
+                modifier = Modifier,
+                icon = Icons.Rounded.CheckCircle,
+                message = stringResource(Res.string.successful_purchase),
+                action = { shouldShowDialog = false },
+                onDismiss = { shouldShowDialog = false }
+            )
         }
     }
 }
