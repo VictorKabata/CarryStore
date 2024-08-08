@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinX.serialization)
     alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.kover)
 }
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -130,6 +131,45 @@ android {
     }
     testOptions.unitTests.isIncludeAndroidResources = true
 }
+
+kover {
+    reports {
+        filters {
+            excludes {
+                packages(
+                    "carrystore.shared.generated.resources",
+                    "com.vickbt.carrystore.di",
+                    "com.vickbt.carrystore.ui.theme"
+                )
+            }
+        }
+
+        verify {
+            rule("Minimal line coverage rate in percents") {
+                minBound(20)
+            }
+        }
+
+
+    }
+}
+
+/*koverReport{
+    filters {
+        excludes {
+            //annotatedBy("*Generated*")
+        }
+    }
+
+    verify {
+        rule("Minimal line coverage rate in percents") {
+            isEnabled = true
+            bound {
+                minValue = 100
+            }
+        }
+    }
+}*/
 
 sqldelight {
     databases {
