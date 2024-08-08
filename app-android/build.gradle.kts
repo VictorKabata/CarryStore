@@ -15,8 +15,8 @@ android {
         applicationId = "com.vickbt.carrystore.android"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = System.getenv("VERSION_CODE")?.toInt() ?: 1
+        versionName = System.getenv("VERSION_NAME")?.toString() ?: "0.0.1"
     }
     buildFeatures {
         compose = true

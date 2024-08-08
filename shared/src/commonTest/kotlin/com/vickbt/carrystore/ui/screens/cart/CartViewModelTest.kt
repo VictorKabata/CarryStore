@@ -23,7 +23,7 @@ import kotlin.test.assertFails
 
 class CartViewModelTest {
 
-    //Subject under test
+    // Subject under test
     private lateinit var viewModel: CartViewModel
 
     private val cartRepository = FakeCartRepository()
