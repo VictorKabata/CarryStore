@@ -27,7 +27,7 @@ import carrystore.shared.generated.resources.nunito
 import org.jetbrains.compose.resources.Font
 
 @Composable
-fun ErrorState(
+fun InfoItem(
     modifier: Modifier,
     errorIcon: ImageVector = Icons.Rounded.Error,
     errorMessage: String,
@@ -43,7 +43,7 @@ fun ErrorState(
             modifier = Modifier.size(150.dp),
             imageVector = errorIcon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface
+            tint = MaterialTheme.colorScheme.primary
         )
 
         Text(

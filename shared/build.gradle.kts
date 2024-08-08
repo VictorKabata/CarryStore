@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinX.serialization)
     alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.kover)
 }
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -32,9 +33,9 @@ kotlin {
     )
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
+        summary = "E-commerce application"
+        homepage = "https://github.com/VictorKabata/CarryStore"
+        version = System.getenv("VERSION_NAME")?.toString() ?: "0.0.1"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../app-ios/Podfile")
         framework {
@@ -130,6 +131,43 @@ android {
     }
     testOptions.unitTests.isIncludeAndroidResources = true
 }
+
+kover {
+    reports {
+        filters {
+            excludes {
+                packages(
+                    "carrystore.shared.generated.resources",
+                    "com.vickbt.carrystore.di",
+                    "com.vickbt.carrystore.ui.theme"
+                )
+            }
+        }
+
+        verify {
+            rule("Minimal line coverage rate in percents") {
+                minBound(20)
+            }
+        }
+    }
+}
+
+/*koverReport{
+    filters {
+        excludes {
+            //annotatedBy("*Generated*")
+        }
+    }
+
+    verify {
+        rule("Minimal line coverage rate in percents") {
+            isEnabled = true
+            bound {
+                minValue = 100
+            }
+        }
+    }
+}*/
 
 sqldelight {
     databases {
