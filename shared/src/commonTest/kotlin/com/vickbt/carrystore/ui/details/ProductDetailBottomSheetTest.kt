@@ -4,15 +4,11 @@ package com.vickbt.carrystore.ui.details
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
-import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.runComposeUiTest
 import com.vickbt.carrystore.ui.screens.details.ProductBottomSheet
 import com.vickbt.carrystore.utils.ProductHelper
@@ -32,8 +28,8 @@ class ProductDetailBottomSheetTest {
                 onItemCountChanged = { itemCount = it },
                 onAddToCartClicked = {},
                 onBuyNowClicked = {},
-                onIncrement = { itemCount +1 },
-                onDecrement = { itemCount -1 }
+                onIncrement = { itemCount + 1 },
+                onDecrement = { itemCount - 1 }
             )
         }
 
@@ -43,5 +39,4 @@ class ProductDetailBottomSheetTest {
         onNodeWithTag("text_product_description").assertTextEquals(product.description)
         onNodeWithTag("text_count").assertTextEquals(itemCount.toString())
     }
-
 }

@@ -69,7 +69,7 @@ fun ProductBottomSheet(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    modifier=Modifier.testTag("text_product_name"),
+                    modifier = Modifier.testTag("text_product_name"),
                     text = product.name,
                     fontSize = 24.sp,
                     maxLines = 1,
@@ -80,7 +80,7 @@ fun ProductBottomSheet(
                 )
 
                 Text(
-                    modifier=Modifier.testTag("text_product_price"),
+                    modifier = Modifier.testTag("text_product_price"),
                     text = "${product.currencyCode} ${product.price}",
                     fontSize = 24.sp,
                     maxLines = 1,
@@ -110,7 +110,7 @@ fun ProductBottomSheet(
                 )
 
                 Text(
-                    modifier=Modifier.testTag("text_product_description"),
+                    modifier = Modifier.testTag("text_product_description"),
                     text = product.description,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
