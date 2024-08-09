@@ -152,8 +152,11 @@ fun ProductBottomSheet(
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        text = if (product.cartQuantity == null) stringResource(Res.string.add_to_cart)
-                        else stringResource(Res.string.update_cart),
+                        text = if (product.cartQuantity == null) {
+                            stringResource(Res.string.add_to_cart)
+                        } else {
+                            stringResource(Res.string.update_cart)
+                        },
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onPrimary,

@@ -1,7 +1,8 @@
 @file:OptIn(
     KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class
 )
 
 package com.vickbt.carrystore.ui.screens.products
@@ -131,7 +132,8 @@ fun ProductsScreen(
                         ItemProduct(
                             modifier = Modifier.clickable(
                                 enabled = !sheetState.isVisible,
-                                onClick = {}),
+                                onClick = {}
+                            ),
                             product = product,
                             onClick = {
                                 scope.launch {

@@ -8,8 +8,8 @@ data class ProductsUiState(
     val isLoading: Boolean = true,
     val errorMessage: String? = null,
     val products: List<Product>? = emptyList(),
-    val cartProduct:Product? = null,
-    val selectedProduct:Product? = null
+    val cartProduct: Product? = null,
+    val selectedProduct: Product? = null
 )
 
 data class ProductDetailsUiState(
