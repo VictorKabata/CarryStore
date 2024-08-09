@@ -48,10 +48,10 @@ The android application can also be downloaded via [Firebase App Distribution](h
 
 ### Android
 
-<img src="images/android1.png" width="250"/> <img src="images/android2.png" width="250"/> <img src="images/android3.png" width="250"/> <img src="images/android4.png" width="250"/> 
+<img src="images/android1.png" width="250"/> <img src="images/android2.png" width="250"/> <img src="images/android3.png" width="250"/> <img src="images/android4.png" width="250"/> <img src="images/android5.png" width="250"/> 
 
 ### iOS
-<img src="images/ios1.png" width="250"/> <img src="images/ios2.png" width="250"/> <img src="images/ios3.png" width="250"/> <img src="images/ios4.png" width="250"/> 
+<img src="images/ios1.png" width="250"/> <img src="images/ios2.png" width="250"/> <img src="images/ios3.png" width="250"/> <img src="images/ios4.png" width="250"/> <img src="images/ios5.png" width="250"/> 
 
 ## Project Structure
 <!-- ToDo: Add project structure image -->
