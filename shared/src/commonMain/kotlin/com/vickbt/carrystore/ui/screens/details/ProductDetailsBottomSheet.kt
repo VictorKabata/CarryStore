@@ -30,6 +30,7 @@ import carrystore.shared.generated.resources.Res
 import carrystore.shared.generated.resources.add_to_cart
 import carrystore.shared.generated.resources.buy_now
 import carrystore.shared.generated.resources.nunito
+import carrystore.shared.generated.resources.update_cart
 import coil3.compose.AsyncImage
 import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.Counter
@@ -41,11 +42,10 @@ fun ProductBottomSheet(
     modifier: Modifier = Modifier,
     product: Product,
     itemCount: Int,
-    onItemCountChanged: (Int) -> Unit,
     onAddToCartClicked: (Product) -> Unit,
     onBuyNowClicked: (Product) -> Unit,
-    onIncrement: () -> Unit,
-    onDecrement: () -> Unit
+    onIncrement: (Int) -> Unit,
+    onDecrement: (Int) -> Unit
 ) {
     val columnScrollState = rememberScrollState()
 
@@ -125,12 +125,10 @@ fun ProductBottomSheet(
                 count = itemCount,
                 maxCount = product.quantity,
                 onIncrement = {
-                    onItemCountChanged(itemCount.plus(1))
-                    onIncrement()
+                    onIncrement(itemCount.plus(1))
                 },
                 onDecrement = {
-                    onItemCountChanged(itemCount.minus(1))
-                    onDecrement()
+                    onDecrement(itemCount.minus(1))
                 }
             )
 
@@ -143,7 +141,8 @@ fun ProductBottomSheet(
                 verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
             ) {
                 Button(
-                    modifier = Modifier.testTag("button_add_to_cart").fillMaxWidth().padding(vertical = 8.dp),
+                    modifier = Modifier.testTag("button_add_to_cart").fillMaxWidth()
+                        .padding(vertical = 8.dp),
                     onClick = { onAddToCartClicked(product) },
                     shape = MaterialTheme.shapes.extraLarge,
                     colors = ButtonDefaults.buttonColors(
@@ -153,7 +152,8 @@ fun ProductBottomSheet(
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 6.dp),
-                        text = stringResource(Res.string.add_to_cart),
+                        text = if (product.cartQuantity == null) stringResource(Res.string.add_to_cart)
+                        else stringResource(Res.string.update_cart),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onPrimary,
