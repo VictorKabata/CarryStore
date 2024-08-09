@@ -42,8 +42,8 @@ fun ProductBottomSheet(
     modifier: Modifier = Modifier,
     product: Product,
     itemCount: Int,
-    onAddToCartClicked: (Product) -> Unit,
-    onBuyNowClicked: (Product) -> Unit,
+    onAddToCartClicked: (Product) -> Unit = {},
+    onBuyNowClicked: (Product) -> Unit = {},
     onIncrement: (Int) -> Unit,
     onDecrement: (Int) -> Unit
 ) {
