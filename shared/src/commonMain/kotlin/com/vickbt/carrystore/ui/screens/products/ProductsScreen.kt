@@ -1,11 +1,13 @@
 @file:OptIn(
     KoinExperimentalAPI::class,
     ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class,
     ExperimentalMaterial3Api::class
 )
 
 package com.vickbt.carrystore.ui.screens.products
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import carrystore.shared.generated.resources.Res
 import carrystore.shared.generated.resources.reload
 import carrystore.shared.generated.resources.successful_purchase
-import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.ui.components.InfoItem
 import com.vickbt.carrystore.ui.components.ItemProduct
 import com.vickbt.carrystore.ui.components.StatusDialog
@@ -58,10 +59,10 @@ fun ProductsScreen(
 ) {
     val productsUiState = viewModel.productsUiState.collectAsState().value
 
+    println("Victor ProductsUiState: ${productsUiState.cartProduct}")
+
     val localDensity = LocalDensity.current
     var sheetContentHeight by remember { mutableStateOf(Dp.Unspecified) }
-
-    var selectedProduct by remember { mutableStateOf<Product?>(null) }
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
@@ -70,17 +71,17 @@ fun ProductsScreen(
 
     val scope = rememberCoroutineScope()
 
-    var cartQuantity by remember { mutableStateOf(1) }
-    var itemCount by remember { mutableStateOf(0) }
-
-    LaunchedEffect(!sheetState.isVisible) { itemCount = 1 }
+    var itemCount by remember { mutableStateOf(productsUiState.selectedProduct?.cartQuantity ?: 1) }
+    LaunchedEffect(productsUiState.selectedProduct) {
+        itemCount = productsUiState.selectedProduct?.cartQuantity ?: 1
+    }
 
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
         sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         sheetContainerColor = MaterialTheme.colorScheme.surfaceContainer,
         sheetContent = {
-            selectedProduct?.let { product ->
+            productsUiState.selectedProduct?.let { product ->
                 ProductBottomSheet(
                     modifier = Modifier.fillMaxWidth().height(sheetContentHeight)
                         .onGloballyPositioned { coordinates ->
@@ -89,20 +90,18 @@ fun ProductsScreen(
                             }
                         },
                     product = product,
-                    onItemCountChanged = { newValue ->
-                        cartQuantity = newValue
-                    },
                     onAddToCartClicked = {
-                        viewModel.saveProduct(product = it.copy(cartQuantity = cartQuantity))
+                        viewModel.saveProduct(product = it.copy(cartQuantity = itemCount))
                         scope.launch { sheetState.hide() }
                     },
                     onBuyNowClicked = {
                         shouldShowDialog = true
+                        viewModel.deleteProduct(id = it.id)
                         scope.launch { sheetState.hide() }
                     },
                     itemCount = itemCount,
-                    onDecrement = { itemCount-- },
-                    onIncrement = { itemCount++ }
+                    onDecrement = { itemCount = it },
+                    onIncrement = { itemCount = it }
                 )
             }
         }
@@ -131,12 +130,15 @@ fun ProductsScreen(
                 ) {
                     items(productsUiState.products ?: emptyList()) { product ->
                         ItemProduct(
-                            modifier = Modifier,
+                            modifier = Modifier.clickable(
+                                enabled = !sheetState.isVisible,
+                                onClick = {}
+                            ),
                             product = product,
                             onClick = {
                                 scope.launch {
                                     if (!sheetState.isVisible) {
-                                        selectedProduct = product
+                                        viewModel.getProduct(product)
                                         sheetState.expand()
                                     } else {
                                         sheetState.hide()

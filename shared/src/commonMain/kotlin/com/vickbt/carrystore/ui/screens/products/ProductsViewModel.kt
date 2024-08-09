@@ -41,4 +41,22 @@ class ProductsViewModel(
             _productsUiState.update { it.copy(errorMessage = e.message) }
         }
     }
+
+    fun getProduct(product: Product) = viewModelScope.launch {
+        try {
+            cartRepository.getProduct(id = product.id).collectLatest { cachedProduct ->
+                _productsUiState.update { it.copy(selectedProduct = cachedProduct ?: product) }
+            }
+        } catch (e: Exception) {
+            _productsUiState.update { it.copy(errorMessage = e.message) }
+        }
+    }
+
+    fun deleteProduct(id: Int) = viewModelScope.launch {
+        try {
+            cartRepository.deleteCartProduct(id)
+        } catch (e: Exception) {
+            _productsUiState.update { it.copy(errorMessage = e.message) }
+        }
+    }
 }
