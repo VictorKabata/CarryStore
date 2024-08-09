@@ -6,7 +6,6 @@ import com.vickbt.carrystore.domain.models.Product
 import com.vickbt.carrystore.domain.repositories.CartRepository
 import com.vickbt.carrystore.domain.repositories.ProductsRepository
 import com.vickbt.carrystore.utils.ProductsUiState
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -44,7 +43,6 @@ class ProductsViewModel(
     }
 
     fun getProduct(product: Product) = viewModelScope.launch {
-        println("Victor Get Product: ${product.id}")
         try {
             cartRepository.getProduct(id = product.id).collectLatest { cachedProduct ->
                 _productsUiState.update { it.copy(selectedProduct = cachedProduct ?: product) }
@@ -54,20 +52,11 @@ class ProductsViewModel(
         }
     }
 
-    fun updateCartItemQuantity(product: Product, intent: UpdateCartIntent) = viewModelScope.launch {
-        when(intent){
-            UpdateCartIntent.Decrease -> {
-                val updatedProduct = product.copy(cartQuantity = product.cartQuantity?.minus(1))
-                cartRepository.saveProduct(updatedProduct)
-            }
-            UpdateCartIntent.Increase -> {
-                val updatedProduct = product.copy(cartQuantity = product.cartQuantity?.plus(1))
-                cartRepository.saveProduct(updatedProduct)
-            }
+    fun deleteProduct(id: Int) = viewModelScope.launch {
+        try {
+            cartRepository.deleteCartProduct(id)
+        } catch (e: Exception) {
+            _productsUiState.update { it.copy(errorMessage = e.message) }
         }
     }
-}
-
-enum class UpdateCartIntent{
-    Decrease, Increase
 }

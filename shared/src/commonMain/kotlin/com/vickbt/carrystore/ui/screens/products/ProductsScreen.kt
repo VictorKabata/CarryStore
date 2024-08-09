@@ -95,6 +95,7 @@ fun ProductsScreen(
                     },
                     onBuyNowClicked = {
                         shouldShowDialog = true
+                        viewModel.deleteProduct(id = it.id)
                         scope.launch { sheetState.hide() }
                     },
                     itemCount = itemCount,
