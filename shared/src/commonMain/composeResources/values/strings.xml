@@ -14,6 +14,7 @@
     <string name="description">Description</string>
 
     <string name="add_to_cart">Add to Cart</string>
+    <string name="update_cart">Update Cart</string>
     <string name="buy_now">Buy Now</string>
 
     <string name="checkout">Checkout</string>

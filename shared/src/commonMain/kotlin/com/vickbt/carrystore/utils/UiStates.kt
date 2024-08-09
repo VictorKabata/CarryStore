@@ -7,7 +7,9 @@ data class MainUiState(val cartItemCount: Int = 0, val errorMessage: String? = n
 data class ProductsUiState(
     val isLoading: Boolean = true,
     val errorMessage: String? = null,
-    val products: List<Product>? = emptyList()
+    val products: List<Product>? = emptyList(),
+    val cartProduct: Product? = null,
+    val selectedProduct: Product? = null
 )
 
 data class ProductDetailsUiState(

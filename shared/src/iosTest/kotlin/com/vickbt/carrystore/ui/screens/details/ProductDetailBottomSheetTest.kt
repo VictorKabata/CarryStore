@@ -35,9 +35,6 @@ class ProductDetailBottomSheetTest {
             ProductBottomSheet(
                 product = product,
                 itemCount = itemCount,
-                onItemCountChanged = { itemCount = it },
-                onAddToCartClicked = {},
-                onBuyNowClicked = {},
                 onIncrement = { itemCount + 1 },
                 onDecrement = { itemCount - 1 }
             )
